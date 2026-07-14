@@ -1,0 +1,64 @@
+Altium Designer Pick and Place Locations
+C:\Users\Public\Documents\Altium\ModdedTubeScreamer\Project Outputs for ModdedTubeScreamer\Pick Place\Pick Place for ModdedTSPCB.txt
+
+========================================================================================================================
+File Design Information:
+
+Date:       12/07/26
+Time:       20:21
+Revision:   Not in VersionControl
+Variant:    No variations
+Units used: mil
+
+Designator Comment                     Layer    Footprint                   Center-X(mil) Center-Y(mil) Rotation Description                                                                                                 
+VR3        B100K                       TopLayer POT_100K_LIN_OFFBOARD       2795.276      1267.323      270      "B100K, 16mm Potentiometers - 18T Knurled Shaft - Solder Lug"                                               
+VR2        B20K                        TopLayer POT_20K_LIN_OFFBOARD        2394.095      1673.228      180      "B20K, 16mm Potentiometers - 18T Knurled Shaft - Solder Lug"                                                
+VR1        A500K                       TopLayer POT_500K_LOG_OFFBOARD       2299.548      3292.918      90       "A500K, 16mm Potentiometers - 18T Knurled Shaft - Solder Lug"                                               
+U1         RC4558IP                    TopLayer OPAMP_RC4558IP              2488.108      2236.058      270      "Standard (General Purpose) Amplifier 2 Circuit Differential 8-PDIP"                                        
+S4         SPDT_TOGGLE_SWITCH_OFFBOARD TopLayer SPDT_TOGGLE_SWITCH_OFFBOARD 2330.999      2773.914      270      "Toggle Switch SPDT Panel Mount"                                                                            
+S3         SPDT_TOGGLE_SWITCH_OFFBOARD TopLayer SPDT_TOGGLE_SWITCH_OFFBOARD 2114.963      2773.914      270      "Toggle Switch SPDT Panel Mount"                                                                            
+S2         SPDT_TOGGLE_SWITCH_OFFBOARD TopLayer SPDT_TOGGLE_SWITCH_OFFBOARD 2125.984      2204.724      90       "Toggle Switch SPDT Panel Mount"                                                                            
+S1         SPDT_TOGGLE_SWITCH_OFFBOARD TopLayer SPDT_TOGGLE_SWITCH_OFFBOARD 1889.764      1673.228      0        "Toggle Switch SPDT Panel Mount"                                                                            
+R17        10K                         TopLayer R_MFR-25FRF52-10K           1437.008      1785.118      270      "10 kOhms ±1% 0.25W, 1/4W Through Hole Resistor Axial Metal Film"                                           
+R16        10K                         TopLayer R_MFR-25FRF52-10K           1344.803      1141.732      0        "10 kOhms ±1% 0.25W, 1/4W Through Hole Resistor Axial Metal Film"                                           
+R15        510K                        TopLayer R_MFR-25FTE52-510K          1344.803      1279.528      180      "510 kOhms ±1% 0.25W, 1/4W Through Hole Resistor Axial Metal Film"                                          
+R14        100                         TopLayer R_MFR-25FRF52-100R          1344.803      1417.323      180      "100 Ohms ±1% 0.25W, 1/4W Through Hole Resistor Axial Metal Film"                                           
+R13        1K                          TopLayer R_MFR-25FRF52-1K            2549.594      1325.118      270      "1 kOhms ±1% 0.25W, 1/4W Through Hole Resistor Axial Metal Film"                                            
+R12        220                         TopLayer R_MFR-25FTE52-220R          2244.095      1325.118      90       "220 Ohms ±1% 0.25W, 1/4W Through Hole Resistor Axial Metal Film"                                           
+R11        1K                          TopLayer R_MFR-25FRF52-1K            2644.016      1889.764      180      "1 kOhms ±1% 0.25W, 1/4W Through Hole Resistor Axial Metal Film"                                            
+R10        10K                         TopLayer R_MFR-25FRF52-10K           1895.984      1889.764      0        "10 kOhms ±1% 0.25W, 1/4W Through Hole Resistor Axial Metal Film"                                           
+R9         1K                          TopLayer R_MFR-25FRF52-1K            2806.866      2289.684      270      "1 kOhms ±1% 0.25W, 1/4W Through Hole Resistor Axial Metal Film"                                            
+R8         51K                         TopLayer R_MFR-25FTE52-51K           2179.650      3074.906      0        "51 kOhms ±1% 0.25W, 1/4W Through Hole Resistor Axial Metal Film"                                           
+R7         4.7K                        TopLayer R_MFR-25FTE52-4K7           1686.264      2204.725      0        "4.7 kOhms ±1% 0.25W, 1/4W Through Hole Resistor Axial Metal Film"                                          
+R6         10K                         TopLayer R_MFR-25FRF52-10K           1764.354      2501.898      0        "10 kOhms ±1% 0.25W, 1/4W Through Hole Resistor Axial Metal Film"                                           
+R5         10K                         TopLayer R_MFR-25FRF52-10K           1762.783      2929.414      180      "10 kOhms ±1% 0.25W, 1/4W Through Hole Resistor Axial Metal Film"                                           
+R4         510K                        TopLayer R_MFR-25FTE52-510K          1879.260      3207.428      180      "510 kOhms ±1% 0.25W, 1/4W Through Hole Resistor Axial Metal Film"                                          
+R3         1K                          TopLayer R_MFR-25FRF52-1K            1879.260      3358.308      0        "1 kOhms ±1% 0.25W, 1/4W Through Hole Resistor Axial Metal Film"                                            
+R2         10K                         TopLayer R_MFR-25FRF52-10K           1520.425      3268.608      270      "10 kOhms ±1% 0.25W, 1/4W Through Hole Resistor Axial Metal Film"                                           
+R1         10K                         TopLayer R_MFR-25FRF52-10K           1382.462      3268.608      270      "10 kOhms ±1% 0.25W, 1/4W Through Hole Resistor Axial Metal Film"                                           
+Q2         2N5089                      TopLayer BJT_2N5089                  1724.513      1200.104      90       "Bipolar (BJT) Transistor NPN 25 V 50 mA 50MHz 625 mW Through Hole TO-92-3"                                 
+Q1         2N5089                      TopLayer BJT_2N5089                  1557.678      2711.672      0        "Bipolar (BJT) Transistor NPN 25 V 50 mA 50MHz 625 mW Through Hole TO-92-3"                                 
+J3         "Output Jack"               TopLayer JACK_MONO_OFFBOARD          1161.418      2066.929      270      "6.35mm (0.250", 1/4") - Headphone Phone Jack Mono Connector Solder Eyelet(s)"                              
+J2         "Input Jack"                TopLayer JACK_MONO_OFFBOARD          2105.889      3503.793      180      "6.35mm (0.250", 1/4") - Headphone Phone Jack Mono Connector Solder Eyelet(s)"                              
+J1         "2.1mm DC Jack"             TopLayer DC_POWER_JACK_OFFBOARD      1161.417      2539.371      90       "Power Barrel Connector Jack 2.10mm ID (0.083"), 5.50mm OD (0.217") Chassis Mount"                          
+D8         "Red, 2.1V, 60°"            TopLayer LED_151051RS11000           2511.111      3420.036      90       "WL-TMRC Mono-color Round Color, THT, D5.9 x H8.7mm, Red, 2.1V, 60°"                                        
+D7         "Red, 2.1V, 60°"            TopLayer LED_151051RS11000           2786.713      3420.023      270      "WL-TMRC Mono-color Round Color, THT, D5.9 x H8.7mm, Red, 2.1V, 60°"                                        
+D6         1N4148                      TopLayer DIODE_1N4148-T50R           2650.499      3202.510      0        "Diode 100 V 200mA Through Hole DO-35"                                                                      
+D5         1N4148                      TopLayer DIODE_1N4148-T50R           2655.223      3074.905      180      "Diode 100 V 200mA Through Hole DO-35"                                                                      
+D4         1N4148                      TopLayer DIODE_1N4148-T50R           2654.825      2942.608      180      "Diode 100 V 200mA Through Hole DO-35"                                                                      
+D3         1N4148                      TopLayer DIODE_1N4148-T50R           2650.499      2673.773      0        "Diode 100 V 200mA Through Hole DO-35"                                                                      
+D2         1N4148                      TopLayer DIODE_1N4148-T50R           2654.825      2811.044      180      "Diode 100 V 200mA Through Hole DO-35"                                                                      
+D1         1N4007                      TopLayer DIODE_1N4007FFG             1325.602      2634.220      270      "Diode 1000 V 1A Through Hole Axial"                                                                        
+C13        47nF                        TopLayer CAP_R82EC2470SH60J          1889.764      1435.433      90       "0.047 µF Film Capacitor 63V 100V Polyester, Polyethylene Terephthalate (PET), Metallized - Stacked Radial" 
+C12        82nF                        TopLayer CAP_R82EC2820SH60J          1789.764      2053.634      0        "0.082 µF Film Capacitor 63V 100V Polyester, Polyethylene Terephthalate (PET), Metallized - Stacked Radial" 
+C11        10uF                        TopLayer CAP_63PX10MEFC5X11          1200.787      1614.173      0        "10 µF 63 V Aluminum Electrolytic Capacitors Radial, Can 1000 Hrs @ 105°C"                                  
+C10        100nF                       TopLayer CAP_R82DC3100AA50K          1988.095      1164.391      180      "0.1 µF Film Capacitor 40V 63V Polyester, Polyethylene Terephthalate (PET), Metallized - Stacked Radial"    
+C9         1uF                         TopLayer CAP_R82DC4100AA60K          2814.960      1658.605      270      "1 µF Film Capacitor 40V 63V Polyester, Polyethylene Terephthalate (PET), Metallized - Stacked Radial"      
+C8         220nF                       TopLayer CAP_R82DC3220Z360J          2401.575      1435.433      90       "0.22 µF Film Capacitor 40V 63V Polyester, Polyethylene Terephthalate (PET), Metallized - Stacked Radial"   
+C7         220nF                       TopLayer CAP_R82DC3220Z360J          2040.821      1435.433      90       "0.22 µF Film Capacitor 40V 63V Polyester, Polyethylene Terephthalate (PET), Metallized - Stacked Radial"   
+C6         51pF                        TopLayer CAP_C315C510K3G5TA          2627.165      2519.685      0        "51 pF ±10% 25V Ceramic Capacitor C0G, NP0 Radial"                                                          
+C5         47nF                        TopLayer CAP_R82EC2470SH60J          1789.764      2354.058      0        "0.047 µF Film Capacitor 63V 100V Polyester, Polyethylene Terephthalate (PET), Metallized - Stacked Radial" 
+C4         1uF                         TopLayer CAP_R82DC4100AA60K          1871.653      2716.535      0        "1 µF Film Capacitor 40V 63V Polyester, Polyethylene Terephthalate (PET), Metallized - Stacked Radial"      
+C3         22nF                        TopLayer CAP_R82EC2220SH50J          1769.388      3503.793      180      "0.022 µF Film Capacitor 63V 100V Polyester, Polyethylene Terephthalate (PET), Metallized - Stacked Radial" 
+C2         100uF                       TopLayer CAP_25PX100MEFC5X11         1196.463      3105.220      90       "100 µF 25 V Aluminum Electrolytic Capacitors Radial, Can 1000 Hrs @ 105°C"                                 
+C1         47uF                        TopLayer CAP_35YXJ47M5X11            1185.563      3402.670      270      "47 µF 35 V Aluminum Electrolytic Capacitors Radial, Can 5000 Hrs @ 105°C"                                  
