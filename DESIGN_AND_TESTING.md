@@ -12,8 +12,8 @@ For the project overview, controls, build information, repository guide, and cur
 * [1. Circuit Research and Part-by-Part Analysis](#1-circuit-research-and-part-by-part-analysis)
 * [2. Original TS808 Simulation and Breadboard Prototype](#2-original-ts808-simulation-and-breadboard-prototype)
 * [3. Frequency-Response and Clipping Experiments](#3-frequency-response-and-clipping-experiments)
-* [4. Perfboard and Faceless Enclosure Prototype](#4-perfboard-and-faceless-enclosure-prototype)
-* [5. Prototype Validation](#5-prototype-validation)
+* [4. Perfboard, Faceless Enclosure, and Prototype Validation](#4-perfboard-faceless-enclosure-and-prototype-validation)
+* [5. Component Selection and Price Optimization](#5-component-selection-and-price-optimization)
 * [6. PCB Design in Altium Designer](#6-pcb-design-in-altium-designer)
 * [7. Enclosure Remodeling and Mechanical Integration](#7-enclosure-remodeling-and-mechanical-integration)
 * [8. Final Assembly and Testing](#8-final-assembly-and-testing)
@@ -82,7 +82,13 @@ The 808 EQ+ was developed through several stages, beginning with an in-depth stu
 
 The original TS808 circuit was studied in detail before beginning the physical design.
 
-Each major section was analyzed separately, including:
+The [ElectroSmash](https://electrosmash.mas-effects.com/) Tube Screamer analysis was an especially useful reference. It provides an approachable but detailed explanation of the theory, mathematics, and behavior of the circuit and is a valuable resource for readers who want to understand why each stage operates as it does.
+
+Additional background came from Sascha Suhr's book, [*Tracking Down Your Dream Tone — Build Your Own Guitar Effects Pedals: A Beginner's Guide*](https://www.amazon.com/dp/B09ZCJLB9J), which introduces both the theory and practical process involved in designing and building guitar effects pedals.
+
+Other relevant concepts were researched through a wide range of freely available online educational resources. This research was supplemented by my background in computer engineering from the University of Utah.
+
+Each major section of the TS808 circuit was analyzed separately, including:
 
 * Input and output buffers
 * Bias network
@@ -92,6 +98,7 @@ Each major section was analyzed separately, including:
 * Active tone control
 * Power filtering
 * Bypass behavior
+* And other small intricacies
 
 This research established a known working baseline and made it possible to evaluate later modifications without losing track of the original circuit behavior.
 
@@ -99,15 +106,11 @@ The part-by-part analysis was also used to identify modern components that could
 
 ### 2. Original TS808 Simulation and Breadboard Prototype
 
-A simulation of the original circuit was created in LTspice.
+The development process began with a publicly available schematic of the original TS808 circuit. That unmodified circuit was first recreated in LTspice and then assembled on a breadboard using the original topology and modern, functionally equivalent components.
 
-![LTspice circuit](Images/Software/LTspice_Circuit.png)
+Establishing a working unmodified circuit *first* provided a reference against which every later change could be evaluated. Full-size potentiometers, audio jacks, and a Dc barrel jack were integrated into the breadboard during this stage so the circuit could be evaluated as a complete pedal system.
 
-The circuit was then assembled on a breadboard using the original topology and modern, functionally equivalent components.
-
-Establishing a working unmodified circuit first provided a reference against which every later change could be evaluated.
-
-The breadboard stage was used to confirm:
+The breadboard stage facilitated the analysis of...
 
 * Basic signal flow
 * Input and output buffer operation
@@ -118,63 +121,75 @@ The breadboard stage was used to confirm:
 * Symmetric silicon clipping
 * Practical operation with a guitar and amplifier
 
-Most of the full-size potentiometers, jacks, and temporary switching hardware were already used during this stage.
-
-*Photos of the original breadboard prototype will be added here.*
+Images were not captured of the original unmodified LTspice circuit or breadboard prototype. However, images shown in the following section display the later circuit after the selected EQ+ modifications had been integrated.
 
 ### 3. Frequency-Response and Clipping Experiments
 
-The breadboard circuit was modified one component and one circuit branch at a time.
+After the original circuit was operating correctly, the breadboard and LTspice models were modified one component and one circuit branch at a time.
 
-An Analog Discovery 2 was used to examine:
+The goal was to strike a useful balance between preserving the original TS808 character and adding meaningful tone-shaping options. The modifications were intended to be clearly audible without becoming either extreme or underwhelming.
+
+An Analog Discovery 2 and WaveForms software were used to examine:
 
 * Frequency response
 * Filter corner frequencies
 * Gain changes
 * Symmetric and asymmetric clipping
 * Diode forward-voltage effects
-* Bass-extension values
-* Treble-extension values
 * Output amplitude
 * Waveform shape
 
-Several component values and circuit arrangements were compared before selecting the final Bass Pass Through, Treb Pass Through, symmetric silicon, asymmetric silicon, and LED configurations.
+Although these tools provided useful electrical measurements, a guitar-pedal circuit is difficult to characterize completely with a single set of tests. Its behavior can vary with the frequency and amplitude of the input signal, component tolerances, power-supply quality, radio-frequency interference, and other practical conditions. Each physical build may therefore behave slightly differently.
 
-The selected Bass Pass Through configuration lowers the distortion-stage high-pass corner from approximately **720 Hz to 410 Hz**.
+Final design decisions were made using a combination of circuit theory and analysis, LTspice simulation, Analog Discovery 2 measurements, and careful listening and experimentation with a guitar and amplifier. Measurements helped explain and compare circuit behavior, while hands-on playing determined whether each change was musically useful.
 
-The selected Treb Pass Through configuration raises the tone-stage low-pass corner from approximately **720 Hz to 3.4 kHz**.
+![Modified 808 EQ+ LTspice circuit](Images/Software/LTspice_Circuit.png)
 
-### 4. Perfboard and Faceless Enclosure Prototype
+*The circuit shown above is the final LTspice model containing the selected 808 EQ+ modifications, rather than the original unmodified TS808 simulation.*
 
-After the breadboard design was stable, a perfboard prototype was developed to create a more compact and finalized version of the circuit that was ready to mount inside a pedal enclosure.
+Much of the Bass Pass Through and Treb Pass Through development involved swapping capacitor and resistor values, adding new components, and testing those components at different points in the signal path.
+
+The Bass Pass Through was designed to let enough low end through to give the guitar a thicker, fuller underbelly without making the distorted low frequencies excessively strong or muddy. The selected configuration lowers the distortion-stage high-pass corner from approximately **720 Hz to 410 Hz**.
+
+The Treb Pass Through was designed to give the pedal a significantly more transparent and open sound without making it excessively harsh or fizzy. The selected configuration raises the tone-stage low-pass corner from approximately **720 Hz to 3.4 kHz**.
+
+The clipping-stage experiments compared several arrangements of LEDs and 1N4148 silicon diodes. These included symmetric and asymmetric configurations of each diode type, as well as arrangements that mixed LED and silicon diodes. The final configurations were selected because each provided a distinct and musically useful response.
+
+The LEDs have a significantly higher forward voltage than the 1N4148 diodes. This raises the clipping threshold, producing substantially greater output volume, less compression, more headroom, and a more dynamic distortion response.
+
+The asymmetric silicon configuration uses one 1N4148 diode in one direction and two series-connected 1N4148 diodes in the opposite direction. These branches are connected anti-parallel. It was selected as a subtle variation on the original TS808 configuration, which uses one 1N4148 diode in each direction. The asymmetric arrangement provides a slight increase in output volume and introduces additional even-order harmonic content, often associated with a thicker, more vintage-style sound.
+
+*A photograph of the modified breadboard circuit will be added here.*
+
+Several other possible features were also considered and tested, including:
+
+* A switch for increased distortion
+* A switch that changed the output resistor between TS808 and TS9 values
+* A wet/dry blend control
+* Additional diode configurations
+
+These options were not included in the final design because their changes were underwhelming or insignificant, or because the additional circuitry and controls fell outside the intended scope and complexity of the project.
+
+### 4. Perfboard, Faceless Enclosure, and Prototype Validation
+
+After the breadboard design was stable, it was transferred to perfboard to create a compact, more permanent circuit that reduced loose wiring, established a practical layout, and could be mounted inside a pedal enclosure.
 
 ![Perfboard layout](Images/Software/Perfboard_DIYLayout.png)
 
-This stage transferred the tested breadboard circuit into a more permanent form, reduced the amount of loose wiring, and established a practical circuit layout for enclosure installation.
-
-The perfboard prototype was not primarily used to introduce the potentiometers, audio jacks, or temporary switching hardware, since most of those components had already been used during breadboard testing.
-
-Instead, the purpose of the perfboard stage was to:
+The purpose of the perfboard stage was to:
 
 * Consolidate the circuit
-* Create a durable prototype
+* Integrate the true bypass foot switch
 * Reduce breadboard-related connection problems
-* Prepare the circuit for enclosure mounting
-* Test the design in a portable pedal format
+* Test the design in a more durable and portable pedal format
 * Confirm the final circuit before beginning PCB design
 
-The first enclosure prototype was intentionally faceless and focused primarily on fit and function rather than appearance.
+The first enclosure prototype was intentionally faceless and focused primarily on fit and function rather than appearance. It provided a practical way to mount the circuit and controls before committing to the custom PCB and final enclosure design.
 
-It provided a practical way to mount the circuit and controls before committing to the custom PCB and final enclosure design.
-
-*Photos of the perfboard and prototype enclosure will be added here.*
-
-### 5. Prototype Validation
-
-The perfboard prototype was used to confirm:
+The perfboard + test enclosure prototype was used to confirm:
 
 * Basic effect operation
-* Mechanical true bypass
+* True bypass functionality
 * Drive, Tone, and Level controls
 * Bass Pass Through behavior
 * Treb Pass Through behavior
@@ -187,13 +202,29 @@ The perfboard prototype was used to confirm:
 
 This validation established the final circuit configuration transferred to the custom PCB.
 
+The perfboard circuit and faceless enclosure also exposed practical problems that were not as apparent during breadboard testing. These steps were helpful in understanding the intricacies of developing an intuitive, visually appealing, and reliable pedal. They allowed me to refine the physical circuit-assembly process, develop a more compact and easy-to-use enclosure, and configure 3D-printing settings that balanced appearance, dimensional accuracy, and functionality.
+
+*Photos of the perfboard circuit and faceless enclosure prototype will be added here.*
+
+### 5. Component Selection and Price Optimization
+
+Considerable time was spent selecting quality components for the later revisions. This work had to be completed before PCB design because the exact component dimensions, pin spacing, and package styles were required to create or verify footprints and plan the board layout.
+
+Many parts used in the early breadboard and perfboard prototypes came from bulk component variety kits. For the custom PCB revision, the goal was to source only the required parts, reduce unnecessary purchases, improve component consistency, and streamline assembly.
+
+Parts were compared through Octopart and supplier catalogs from DigiKey, LCSC, Tayda Electronics, Mouser, and other vendors. DigiKey was selected as the primary source for on-board electronic components because it offered all the required parts, reputable component quality, reasonable pricing, and the ability to consolidate the order through one supplier.
+
+The available options from these suppliers were less suitable for much of the off-board hardware. Love My Switches was selected for affordable, good-quality potentiometers and mono jacks. The SPDT toggle switches and true-bypass footswitches were purchased through Amazon because they were significantly less expensive and the parts had already proved reliable in the first prototype.
+
+Each supplier was chosen by balancing component cost, quality, availability, and total shipping expense. Enough parts were purchased to build five pedals, which reduced the estimated per-pedal cost through quantity pricing and by spreading shipping costs across multiple builds.
+
 ### 6. PCB Design in Altium Designer
 
 The validated circuit was transferred into Altium Designer.
 
-Many schematic symbols and PCB footprints were sourced from DigiKey. These resources were collected, reviewed, corrected where necessary, and assembled into organized project libraries.
+Many schematic symbols and PCB footprints were sourced from DigiKey. These resources were collected, reviewed, corrected where necessary, and assembled into organized project libraries. Custom components were created when a suitable existing symbol or footprint was not available.
 
-Custom components were created when a suitable existing symbol or footprint was not available.
+Board size and component placement were optimized so the PCB would fit within a compact pedal enclosure. Components belonging to the same functional circuit block were kept near one another, while trace lengths, unnecessary crossings, and layer changes were minimized where practical. Footprint reference designators, value labels, and polarity markings were also aligned and oriented for easy reading during hand assembly and inspection.
 
 The PCB-design process included:
 
@@ -205,9 +236,12 @@ The PCB-design process included:
 * Assigning components and designators
 * Defining the board shape
 * Placing through-hole components
+* Grouping components by functional circuit block
+* Minimizing board area, trace length, and unnecessary trace crossings
+* Aligning component labels for efficient assembly and inspection
+* Positioning off-board connection pads
 * Routing signal and power traces
 * Creating top and bottom ground pours
-* Positioning off-board connection pads
 * Running electrical-rule checks
 * Running PCB design-rule checks
 * Generating fabrication files
@@ -216,7 +250,7 @@ The PCB-design process included:
 
 The board uses through-hole components to make hand assembly, inspection, repair, and experimentation more accessible.
 
-Several components associated with tone, clipping, component selection, or troubleshooting can be installed in machine-pin sockets rather than soldered permanently.
+Note: Various components can be installed in machine-pin sockets rather than soldered permanently to ease tone experimentation, troubleshooting, and repair. Suggested components include Q1, Q2, U1, C12, C13, and diodes.
 
 ### 7. Enclosure Remodeling and Mechanical Integration
 
