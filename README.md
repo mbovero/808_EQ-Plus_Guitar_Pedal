@@ -7,7 +7,7 @@ Most of the 808 EQ+ signal path closely replicates the original TS808 using mode
 When more flexibility is desired, the added switches can extend the pedal’s bass response, open its upper-frequency response, and select between three distinct clipping configurations.
 
 > [!IMPORTANT]
-> **Project status:** The circuit and earlier prototypes have been tested. The latest PCB and enclosure revision are currently undergoing final assembly and validation. Final enclosure exports, print files, dimensional drawings, physical build photographs, and complete assembly instructions will be added after testing.
+> **Project status:** This project is still in progress. Not all README files are complete, and some sections are still missing information and images. The documentation will continue to be revised and expanded as the remaining prototypes, photographs, demonstrations, and guides are completed.
 
 ## Table of Contents
 
@@ -25,20 +25,16 @@ When more flexibility is desired, the added switches can extend the pedal’s ba
 * [Technical Design and Testing Documentation](#technical-design-and-testing-documentation)
 * [Bill of Materials, Tools, and Fabrication Information](#bill-of-materials-tools-and-fabrication-information)
 * [Planned Build Process](#planned-build-process)
-* [Repository Contents](#repository-contents)
 * [Known Limitations](#known-limitations)
 * [Credits and References](#credits-and-references)
 * [Disclaimer](#disclaimer)
 
 ## Features
 
-* TS808-style signal path using modern, functionally equivalent components
-* Ability to return all added tone and clipping controls to a traditional TS808 configuration
-* Switchable bass-response extension
-* Switchable treble-response extension
+* Ability to return all added tone and clipping controls to a traditional TS808 configuration, using modern, functionally equivalent components throughout the circuit
+* Independently switchable bass- and treble-response extensions
 * Three selectable diode-clipping configurations
-* Original-style Drive, Tone, and Level controls
-* Mechanical true-bypass switching
+* True-bypass switching
 * Custom through-hole PCB
 * Fully modeled and 3D-printed enclosure
 * Custom printed knobs, LED holder, labels, and graphics
@@ -56,13 +52,14 @@ When more flexibility is desired, the added switches can extend the pedal’s ba
 * [x] PCB manufacturing files prepared
 * [x] Enclosure modeled
 * [x] Latest PCB revision fully assembled and validated
-* [ ] Latest enclosure revision physically validated
-* [ ] Final STEP and STL files released
-* [ ] Final Bambu Studio project released
-* [ ] Dimensional drawings released
-* [ ] Final PCB and pedal photographs added
+* [x] Latest enclosure revision physically validated
+* [x] Final STEP and STL files uploaded
+* [x] Final Bambu Studio project uploaded
+* [x] Dimensional drawings uploaded
+* [ ] Final prototype, PCB, and pedal photographs added
 * [ ] Audio demonstrations added
-* [ ] Complete build guide added
+* [ ] Main README, technical documentation, and build guide completed
+* [ ] Polished user guide developed
 
 ---
 
@@ -72,20 +69,19 @@ The Tube Screamer is best known for its characteristic mid hump, smooth symmetri
 
 The 808 EQ+ preserves that foundation.
 
-Rather than replacing the original TS808 tone, the added controls make it possible to temporarily move beyond it. The bass and treble switches alter specific filter corner frequencies, while the clipping switches change the headroom, compression, volume, and feel of the distortion.
+Rather than replacing the original TS808 tone, the added controls make it possible to temporarily move beyond it. The bass and treble switches give the player access to a fuller, clearer sound with more low end and/or upper-frequency detail. The clipping switches change the headroom, compression, volume, and feel of the distortion.
 
-With the added switches returned to their default positions, the pedal can operate much like a traditional TS808.
+With the added switches returned to their default positions, the pedal can operate like a traditional TS808.
 
 ### Traditional TS808 Character
 
 In its default configuration, the 808 EQ+ provides:
 
 * Reduced bass entering the distortion stage
-* Reduced upper treble after the clipping stage
+* Reduced upper treble after the tone stage
 * A pronounced mid-focused response
 * Symmetric silicon-diode clipping
-* Smooth compression
-* Strong sustain
+* Moderate compression and sustain
 * Familiar Drive, Tone, and Level operation
 
 ### Expanded EQ+ Character
@@ -117,7 +113,7 @@ The original TS808 was chosen as a reliable and well-understood foundation.
 
 The goal was not to loosely imitate its sound or to create an unrelated overdrive with a similar name. The signal path was recreated carefully using modern but functionally equivalent components, and the added modifications were designed so they could be removed from the active signal path through the front-panel switches.
 
-This allows the pedal to return to the original bass cut, treble cut, and symmetric silicon clipping that define the traditional Tube Screamer sound.
+This allows the pedal to return to the original bass cut, treble cut, and symmetric silicon clipping that define the traditional Tube Screamer sound, with familiar Drive, Tone, and Level controls.
 
 ### Add More Tone-Shaping Flexibility
 
@@ -132,7 +128,7 @@ Several tone-shaping approaches and component values were tested before selectin
 
 Both modifications are independently switchable.
 
-### Keep the Project Affordable
+### Keep the Project Affordable and Customizable
 
 A major goal was to reduce the cost of producing a complete pedal.
 
@@ -210,16 +206,15 @@ Detailed documentation for the project’s development process, circuit, PCB, en
 The separate document includes:
 
 * Complete design and prototyping process
-* Signal-path overview
 * Circuit-design notes
-* PCB construction and routing information
-* Socketed and replaceable components
+* PCB construction
 * Enclosure design and mechanical integration
-* Multi-color printing considerations
+* 3D Printing considerations
 * Testing methodology
 * Experimental measurements and validation status
+* And more!
 
-Separating this material keeps the main project page approachable while preserving the engineering detail for readers who want a deeper technical explanation.
+This material is separated to keep the main project page more approachable while preserving a deeper technical explanation for interested readers.
 
 ---
 
@@ -270,7 +265,7 @@ A basic build requires suitable soldering equipment, common hand tools, a way to
 
 ## Planned Build Process
 
-A complete illustrated build guide will be added after the latest PCB and enclosure revisions complete validation.
+A complete illustrated build guide will be added as the remaining project documentation is completed.
 
 The planned process is:
 
@@ -297,60 +292,23 @@ The planned process is:
 
 ---
 
-## Repository Contents
-
-The repository currently uses the following structure:
-
-```text
-808_EQ-Plus_Guitar_Pedal/
-├── README.md
-├── DESIGN_AND_TESTING.md
-│
-├── Design/
-│   ├── 3D_Printing/
-│   ├── CAD/
-│   ├── LTspice/
-│   ├── PCB/
-│   ├── 808_EQ-Plus_Single_Pedal_BOM.xlsx
-│   └── 808_EQ-Plus_Tools_and_Fabrication_Info.xlsx
-│
-└── Images/
-    └── Software/
-        ├── Altium_PCB_3D_Bottom.png
-        ├── Altium_PCB_3D_Top.png
-        ├── Altium_PCB_Bottom.png
-        ├── Altium_PCB_Top.png
-        ├── Altium_Schematic.png
-        ├── BambuStudio_Enclosure_Sliced_Iso.png
-        ├── BambuStudio_Enclosure_Sliced_Topdown.png
-        ├── BambuStudio_Enclosure_Sliced_Underside.png
-        ├── Fusion_Assembled_Enclosure_Iso.png
-        ├── Fusion_Assembled_Enclosure_Top.png
-        ├── Fusion_Bare_Enclosure_Inside.png
-        ├── Fusion_Bare_Enclosure_Iso.png
-        ├── Fusion_Bare_Enclosure_Iso_Exploded.png
-        ├── Fusion_Bare_Enclosure_Top.png
-        ├── Fusion_Components_Iso.png
-        ├── Fusion_Components_Side.png
-        ├── Fusion_Components_Top.png
-        ├── LTspice_Circuit.png
-        └── Perfboard_DIYLayout.png
-```
-
-This structure will evolve as final photographs, manufacturing files, drawings, print files, build documentation, and testing results are added.
-
----
-
 ## Known Limitations
 
-* The latest enclosure revision has not yet completed physical fit testing.
+### Hobbyist 3D-Printed Enclosure Considerations
+
 * The printed enclosure does not provide the same impact resistance as a cast-metal pedal enclosure.
 * Common 3D-printing plastics are generally less resistant to high temperatures than metal enclosures and may soften, warp, or deform if exposed to excessive heat.
 * A plastic enclosure does not inherently provide the electromagnetic shielding of a grounded metal enclosure.
-* Multi-color printing can produce substantial purge waste.
-* The design requires a suitable regulated 9 V center-negative supply.
+* Print quality and dimensional accuracy will vary depending on the 3D printer, material, calibration, and print settings used. I cannot guarantee that every print will be suitable for mounting components or that all printed text will be legible.
 * The current enclosure does not include a battery compartment.
+
+### Electronics and Assembly Considerations
+
+* The design requires a suitable regulated 9 V center-negative supply.
 * Some fabrication and assembly steps require prior soldering, electronics, CAD, or 3D-printing experience.
+
+### Variations in Sound and Interpretation
+
 * Exact sound will vary with the guitar, pickups, amplifier, speakers, signal level, power supply, and playing dynamics.
 * Descriptions such as “smooth,” “open,” “gritty,” and “amp-like” are subjective and should not be treated as precise measurements.
 
@@ -395,4 +353,4 @@ Build and use it at your own risk. Verify component values, component orientatio
 
 Disconnect power before modifying the circuit. Avoid making component changes while the pedal is connected to a guitar, amplifier, computer, audio interface, or other valuable equipment.
 
-The design files are still under development and may contain errors or unvalidated revisions.
+The repository may contain mistakes, and reports of any inconsistencies or errors would be greatly appreciated.
