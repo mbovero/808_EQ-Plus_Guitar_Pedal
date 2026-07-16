@@ -11,13 +11,12 @@ When more flexibility is desired, the added switches can extend the pedal’s ba
 
 ## Table of Contents
 
-* [Features](#features)
 * [Project Status](#project-status)
 * [What Is the 808 EQ+?](#what-is-the-808-eq)
 * [Why Build Another Tube Screamer?](#why-build-another-tube-screamer)
 * [Design Goals](#design-goals)
+* [Features](#features)
 * [Controls and Operation](#controls-and-operation)
-
   * [Main Controls](#main-controls)
   * [Tone Switches](#tone-switches)
   * [Clipping Switches and Configurations](#clipping-switches-and-configurations)
@@ -28,17 +27,6 @@ When more flexibility is desired, the added switches can extend the pedal’s ba
 * [Known Limitations](#known-limitations)
 * [Credits and References](#credits-and-references)
 * [Disclaimer](#disclaimer)
-
-## Features
-
-* Ability to return all added tone and clipping controls to a traditional TS808 configuration, using modern, functionally equivalent components throughout the circuit
-* Independently switchable bass- and treble-response extensions
-* Three selectable diode-clipping configurations
-* True-bypass switching
-* Custom through-hole PCB
-* Fully modeled and 3D-printed enclosure
-* Custom printed knobs, LED holder, labels, and graphics
-* Design files, manufacturing files, and component information for hobbyist construction
 
 ## Project Status
 
@@ -90,7 +78,7 @@ The added controls can provide:
 
 * More low-frequency fullness without allowing excessive bass into the distortion stage
 * Considerably more treble, presence, and clarity
-* Higher-headroom, more dynamic LED clipping
+* LED clipping with more headroom for dynamic distortion
 * Asymmetric silicon clipping with slightly greater output and a rougher, more amp-like character
 
 ---
@@ -148,6 +136,20 @@ The repository is intended for:
 * Motivated builders who may not yet have enough knowledge to design a pedal independently
 
 This is not intended to be the simplest possible beginner soldering kit. It is a complete engineering project that includes simulation, prototyping, PCB design, off-board wiring, mechanical design, additive manufacturing, and final assembly.
+
+---
+
+## Features
+
+* Ability to return all added tone and clipping controls to a traditional TS808 configuration, using modern, functionally equivalent components throughout the circuit
+* Independently switchable bass- and treble-response extensions
+* Three selectable diode-clipping configurations
+* True-bypass switching
+* Custom through-hole PCB
+* Fully modeled and 3D-printed enclosure
+* Custom printed knobs, LED holder, labels, and graphics
+* Design files, manufacturing files, and component information for hobbyist construction
+
 
 ---
 
