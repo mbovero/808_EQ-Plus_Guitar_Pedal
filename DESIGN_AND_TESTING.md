@@ -130,17 +130,17 @@ Final design decisions were made using a combination of circuit theory and analy
 
 *The circuit shown above is the final LTspice model containing the selected 808 EQ+ modifications.*
 
-Much of the Bass Pass Through and Treble Pass Through development involved swapping capacitor and resistor values, adding new components, and testing those components at different points in the signal path. 
+Much of the Bass Pass Through and Treb Pass Through development involved experimenting with different capacitor and resistor values, adding components at different points in the signal path, and comparing several switching arrangements. 
 
-The final bass switch was implemented with a SPDT mechanical switch that swaps between C5 (default) and C12 (modified). The Bass Pass Through was designed to let enough low end through to give the guitar a thicker, fuller underbelly without making the distorted low frequencies excessively strong or muddy. The selected configuration lowers the distortion-stage high-pass corner from approximately **720 Hz to 410 Hz**.
+The bass experiments focused on adding enough low-frequency content to produce a thicker, fuller sound without allowing the clipped bass frequencies to become excessively strong or muddy. The treble experiments focused on improving transparency, clarity, and presence without making the pedal sound harsh or fizzy. The final values were selected because they produced noticeable but controlled alternatives to the original TS808 response.
 
-The final treble switch was implemented with a SPDT mechanical switch that swaps between C7 (default) and C13 (modified). The Treble Pass Through was designed to give the pedal a significantly more transparent and open sound without making it excessively harsh or fizzy. The selected configuration raises the tone-stage low-pass corner from approximately **720 Hz to 3.4 kHz**.
+Detailed explanations of the selected circuits, component values, and filter corner frequencies are provided in [Bass Pass Through Switching](#bass-pass-through-switching) and [Treb Pass Through Switching](#treb-pass-through-switching).
 
-The clipping-stage experiments compared several arrangements of LEDs and 1N4148 silicon diodes. These included symmetric and asymmetric configurations of each diode type, as well as arrangements that mixed LED and silicon diodes. The final configurations were selected because each provided a distinct and musically useful response.
+The clipping experiments compared multiple arrangements of LEDs and 1N4148 silicon diodes. Symmetric, asymmetric, and mixed-diode configurations were evaluated for differences in output volume, compression, sustain, picking dynamics, and overall distortion character.
 
-The LEDs have a significantly higher forward voltage than the 1N4148 diodes. This raises the clipping threshold, producing substantially greater output volume, less compression, more headroom, and a more dynamic distortion response.
+The final options were selected because each produced a distinct and practical sound: the original-style symmetric silicon configuration provides the familiar TS808 response, asymmetric silicon clipping offers a subtle variation with additional texture, and symmetric LED clipping provides a louder, more open, and dynamic alternative.
 
-The asymmetric silicon configuration uses one 1N4148 diode in one direction and two series-connected 1N4148 diodes in the opposite direction. These branches are connected anti-parallel. It was selected as a subtle variation on the original TS808 configuration, which uses one 1N4148 diode in each direction. The asymmetric arrangement provides a slight increase in output volume and introduces additional even-order harmonic content, often associated with a thicker, more vintage-style sound.
+For a detailed explanation of the diode arrangements, clipping thresholds, and switch operation, see [Feedback-Loop Diode Clipping](#feedback-loop-diode-clipping) and [Clipping Switches and Configurations](#clipping-switches-and-configurations).
 
 *A photograph of the modified breadboard circuit will be added here.*
 
@@ -236,8 +236,6 @@ The final manufacturing files, PCB files, CAD exports, print files, dimensional 
 
 The 808 EQ+ closely follows the original TS808 signal path while adding switchable filter and clipping options.
 
-The detailed circuit explanation is still being developed. This section currently provides the organizational structure that will later be expanded with component references, equations, diagrams, and measurements.
-
 ### Signal-Path Overview
 
 ```text
@@ -271,93 +269,297 @@ The circuit can be understood as a sequence of functional stages rather than as 
 
 ### Power Supply and Bias Network
 
-*To be expanded.*
+![Power supply and bias network schematic](Images/Software/Altium_Schematic_Power.png)
 
-This section will describe:
+*Altium schematic of the 9 V input, reverse-polarity protection, supply filtering, and power rails.*
 
-* 9 V center-negative power input
-* Reverse-polarity protection
-* Supply filtering
-* Half-supply reference generation
-* Decoupling
-* Bias distribution throughout the signal path
+#### Power Input and Reverse-Polarity Protection
+
+The pedal is designed for a regulated **9 V DC, center-negative power supply** using the 2.1 mm barrel connector commonly found on modern guitar pedals. In this configuration, the connector’s outer sleeve supplies the positive voltage while its center pin is connected to ground.
+
+D1, a **1N4007 rectifier diode**, is placed in series with the positive supply path to provide reverse-polarity protection. This diode differs from the protection components used in historical TS808 circuits, but it was selected to follow common modern pedal-design practices and provide a robust, readily available replacement. Because D1 is part of the power-supply path rather than the audio signal path, this change has no significant effect on the pedal’s sound or tone during normal operation.
+
+If a supply with the opposite polarity is connected, the diode becomes reverse-biased and prevents significant current from flowing through the circuit. The pedal will not operate, and its transistors, op-amp, and polarized capacitors should be protected from reverse-polarity damage.
+
+The diode protects against reversed polarity, but it does not regulate the input or protect the circuit from excessive voltage. A properly polarized supply significantly above 9 V could exceed component ratings and damage the pedal. A regulated 9 V center-negative supply should therefore always be used.
+
+#### 4V5 Bias Reference
+
+R1 and R2 form a voltage divider that produces a nominal voltage equal to half of the protected supply rail. This node is labeled **4V5** and acts as a virtual midpoint for biasing the audio signal throughout the circuit.
+
+Relatively low divider-resistance values were selected to reduce the reference node’s output impedance. This creates a firmer bias reference that is less susceptible to loading and transient voltage changes.
+
+Because the circuit uses a single positive supply rather than positive and negative power rails, the guitar signal cannot remain centered around 0 V. Doing so would cause the negative half of the waveform to approach the ground rail, where it could be clipped or distorted by the BJTs and op-amp. Biasing the signal near half the supply voltage provides room for both halves of the AC waveform to swing above and below their DC operating point.
+
+#### Supply Filtering and Distribution
+
+C2 filters and stabilizes the protected 9 V rail, while C1 filters and stabilizes the 4V5 reference. Their relatively large capacitances provide a low-impedance path to ground for low-frequency supply ripple, transient disturbances, and some coupled interference. This helps provide cleaner and more stable power to the audio circuit, although it cannot eliminate every possible source of power-supply or radio-frequency noise.
+
+The protected 9 V rail powers the active devices directly, including the op-amp supply and BJT collectors. The 4V5 reference is distributed through biasing resistors to establish the DC operating point at the beginning of the circuit’s audio stages. 
+
+#### Nominal and Actual Voltages
+
+Labels such as **9V** and **4V5** describe the intended function of these rails rather than guaranteed measured voltages. The actual DC supply may differ slightly from exactly 9 V, and D1 introduces a forward-voltage drop that is typically around 0.7 V, although it varies with current and temperature. As a result, the protected rail may be closer to approximately 8–8.5 V when powered by a nominal 9 V supply, and the divided reference will be approximately half of that value.
+
+A biasing resistor also does not automatically create a fixed voltage drop; the drop depends on the current flowing through it. Op-amp inputs draw very little current and may remain close to the 4V5 reference, while BJT bias nodes may differ more because of base current and surrounding component values.
+
+These variations are expected and do not prevent normal operation. The important requirement is that each stage maintains a stable operating point with enough headroom for the guitar waveform. A guitar signal is often only a few hundred millivolts during typical playing, although strong transients from high-output pickups can approach roughly 2 V peak-to-peak or more.
 
 ### Input Buffer
 
-*To be expanded.*
+![Input buffer schematic](Images/Software/Altium_Schematic_Input_Buffer.png)
 
-This section will describe:
+*Altium schematic of the input jack, coupling capacitors, bias network, and BJT emitter-follower buffer.*
 
-* Input impedance
-* Transistor-buffer operation
-* Signal biasing
-* Isolation of the guitar pickups from the clipping stage
-* Similarities to the original TS808 input buffer
+#### Purpose and Impedance
+
+The input buffer provides a stable interface between the guitar and the rest of the effect circuit. It isolates the guitar pickups from the more complex loading conditions created by the clipping stage and allows the original signal to be passed forward without intentional voltage amplification.
+
+A good guitar buffer has a **high input impedance** and a **low output impedance**. An input impedance near 1 MΩ is commonly considered desirable, although values of several hundred kilohms are also widely used in guitar pedals. A high input impedance prevents the circuit from drawing substantial current from the pickups and reduces the damping of their natural frequency response. In this circuit, R4 and the transistor’s base impedance provide a sufficiently high input impedance for the guitar signal.
+
+Cable and wiring capacitance can contribute to unwanted filtering. Before the buffer, the guitar pickup impedance, cable capacitance, and pedal input impedance form a more complex frequency-dependent network that can reduce high-frequency content and alter the pickup resonance. Commonly described as “tone sucking,” this effect becomes more noticeable when the following circuit presents too low of an input impedance or when long cables add substantial capacitance.
+
+After the buffer, the interaction can be approximated more simply using:
+
+`f_c = 1 / (2πRC)`
+
+In this relationship, reducing the driving resistance moves the low-pass corner frequency upward. The buffer’s low output impedance therefore allows it to drive the following circuit and its associated capacitance without producing significant filtering within the audible range. A buffer cannot recover high frequencies already lost in the cable before it, but it prevents the following pedal stages from adding substantial additional loading.
+
+#### Input Jack
+
+The input uses a mono 1/4-inch audio jack. The sleeve is connected to circuit ground, while the tip carries the guitar signal into the input buffer.
+
+Stereo input jacks are often used in pedals to disconnect an internal battery when the instrument cable is removed. Battery operation was outside the scope of this project, so a mono jack was selected to simplify the wiring and reduce cost.
+
+#### Coupling Capacitors and Bias Transfer
+
+C3 is an input coupling capacitor. The guitar signal arriving from the input jack is centered around 0 V, while the transistor base must operate at a positive DC bias. C3 blocks the guitar’s original DC level while allowing its AC audio content to pass into the transistor’s bias network.
+
+R4 connects the transistor base to the 4V5 reference, causing the incoming guitar waveform to become centered around the nominal half-supply voltage. This provides room for the signal to swing above and below its new DC operating point without approaching the circuit’s ground rail.
+
+C4 performs a similar function at the buffer output. Because the transistor is configured as an emitter follower, its emitter sits approximately one base-emitter voltage drop below the base—typically around 3–4 V DC in this circuit. C4 blocks that emitter DC level while passing the AC guitar signal to the clipping stage, where it is established around that stage’s own nominal 4V5 bias.
+
+In addition to transferring signals between different DC operating points, the coupling capacitors interact with the surrounding resistances to form high-pass filters. Their values were selected so the desired guitar-frequency range can pass without excessive low-frequency loss.
+
+#### BJT Emitter-Follower Configuration
+
+The BJT is configured as an **emitter follower**, also called a **common-collector amplifier**. The input signal enters through the base, and the buffered output is taken from the emitter. The collector is connected directly to the protected 9 V rail, which supplies the transistor’s operating current and establishes its upper voltage limit.
+
+R3 is a small series base resistor that provides isolation, limits transient base current, and can help reduce unwanted high-frequency or radio-frequency behavior. R4 supplies the base bias while also contributing to the buffer’s input impedance.
+
+R5 provides the emitter with a path to ground and helps establish the transistor’s quiescent current and DC operating point. It also introduces negative feedback: changes in emitter current change the voltage across R5 in a direction that resists further change, improving stability.
+
+An emitter follower has a voltage gain slightly below 1, so it does not significantly amplify the guitar waveform. Its primary benefit is current gain and impedance conversion. The original high-impedance guitar signal is reproduced at the emitter as a lower-impedance, higher-drive signal that can reliably feed the clipping stage.
 
 ### Variable-Gain and Clipping Stage
 
-*To be expanded.*
+![Amplification and clipping stage schematic](Images/Software/Altium_Schematic_Gain_Clipping.png)
 
-This section will describe:
+*Altium schematic of the non-inverting op-amp gain stage, frequency-dependent feedback network, Bass Pass Through switching, and selectable diode-clipping configurations.*
 
-* Non-inverting op-amp operation
-* Drive-pot operation
-* Minimum and maximum gain
-* Frequency-dependent feedback
-* Distortion-stage high-pass filtering
-* Bass Pass Through switching
-* Feedback-loop diode clipping
-* Tight/Open switching
-* Sym/Asym switching
+#### High-Level Behavior
 
-The Bass Pass Through switch lowers the corner frequency of the distortion-stage high-pass filter from approximately **720 Hz to 410 Hz**.
+The purpose of this stage is to add controlled, musically useful distortion to the guitar signal. The input is amplified by an op-amp in a non-inverting configuration until the voltage across the feedback network becomes large enough to forward-bias the clipping diodes. As the diodes begin conducting, they reduce the stage’s effective gain and progressively limit the waveform’s peaks. This produces the smoother transition into distortion commonly described as **soft clipping**.
 
-The clipping network provides three configurations:
+Rather than amplifying every frequency equally, the TS808 feedback network reduces the gain applied to lower frequencies. This keeps excessive bass out of the clipped signal and helps prevent the distortion from becoming loose or muddy. The stage’s frequency-dependent gain, phase response, and diode clipping combine to produce the Tube Screamer’s characteristic waveform, including its tilted and rounded peaks and valleys.
 
-| Tight/Open | Sym/Asym        | Clipping configuration      | General character                                                                  |
-| ---------- | --------------- | --------------------------- | ---------------------------------------------------------------------------------- |
-| **Tight**  | **Sym**         | Symmetric silicon clipping  | Traditional TS808-style response with smooth compression and sustain.              |
-| **Tight**  | **Asym**        | Asymmetric silicon clipping | Slightly greater output with additional grit and a less uniform clipping shape.    |
-| **Open**   | Either position | Symmetric LED clipping      | Higher headroom, greater output, reduced compression, and a more dynamic response. |
+This stage also contains the Bass Pass Through modification and the switches used to select the three clipping configurations.
+
+#### Non-Inverting Amplifier and Drive Control
+
+The op-amp is configured as a non-inverting amplifier. Within the frequency range where the feedback capacitors are not substantially affecting the circuit, its closed-loop gain can be approximated as:
+
+`Gain = 1 + (Rf / Rg)`
+
+In this circuit, `Rf` is primarily formed by R8 and the variable resistance of the Drive potentiometer, while `Rg` is R7. This produces an approximate midband gain range of **12 to 120**.
+
+At the minimum Drive setting, the potentiometer’s wiper and connected outer terminal produce nearly 0 Ω of additional feedback resistance. The gain is then determined primarily by R8 and R7. Turning the Drive control clockwise increases the potentiometer resistance in the feedback path, raising the stage gain and driving the clipping diodes harder.
+
+These gain values are frequency-dependent rather than constant across the entire guitar spectrum. At sufficiently low frequencies, the impedance of C5 or C12 causes the gain to fall toward unity. At very high frequencies, C6 also reduces the gain.
+
+#### Frequency-Dependent Feedback
+
+A capacitor’s opposition to AC current is called **capacitive reactance** and can be approximated as:
+
+`Xc = 1 / (2πfC)`
+
+Capacitive reactance decreases as frequency increases.
+
+C6 is connected across the op-amp’s feedback resistance. At low and middle frequencies, its reactance is high, so the Drive potentiometer and R8 primarily determine `Rf`. At very high frequencies, C6 presents a lower-impedance path around the feedback resistance. This lowers the effective value of `Rf`, reduces the stage gain, and helps prevent very high-frequency noise and harsh, fizzy content from being excessively amplified.
+
+C5 and C12 create the opposite frequency-dependent effect because the selected capacitor is placed in series with R7 in the feedback path to ground. At higher frequencies, the capacitor’s reactance is low and the stage operates near the gain predicted by `1 + Rf/R7`. As frequency decreases, the capacitor’s reactance rises, increasing the impedance of the feedback path to ground (`Rg`) and reducing the stage gain toward unity.
+
+The result is a high-pass response in the stage’s distortion gain: middle and upper frequencies receive substantial amplification and clipping, while lower frequencies remain comparatively cleaner.
+
+#### Bass Pass Through Switching
+
+The original C5 value creates a distortion-stage high-pass corner at approximately **720 Hz**. Selecting C12 lowers this corner to approximately **410 Hz**, allowing more low-frequency content to receive the additional gain needed to enter clipping.
+
+The Bass Pass Through capacitor value was chosen to give the guitar a thicker and fuller low end without allowing the distorted bass frequencies to become excessively strong or muddy.
+
+A passive SPDT switch selects between C5 and C12. This keeps the modification simple and avoids placing an additional active switching circuit inside the sensitive feedback network. However, the inactive capacitor does not have a dedicated discharge path and may retain a small charge. A brief switching pop may therefore occur when changing between the Bass Cut and Bass Pass Through settings.
+
+C5 and C12 also introduce a frequency-dependent phase shift, particularly around their respective corner frequencies. This phase response contributes to the shape of the resulting waveform, although the visible waveform is produced by the combined effects of filtering, amplification, clipping, and phase shift rather than by a simple time delay alone.
+
+![Tube Screamer waveform shape](Images/Software/Waveforms_TS_Wave_Shape.png)
+
+*Measured Tube Screamer-style waveform showing the characteristic shape produced by frequency-dependent amplification, capacitor phase shift, and feedback-loop clipping. Input is orange, and output is blue.*
+
+#### Feedback-Loop Diode Clipping
+
+The clipping diodes are connected inside the op-amp feedback loop. When the voltage difference across the diode network remains below its forward-conduction threshold, the diodes have little effect and the op-amp operates at the gain established by the feedback resistors.
+
+As the amplified signal increases, the diodes begin to conduct and provide a lower-impedance feedback path. This increases negative feedback and reduces the stage’s effective gain near the waveform peaks. Because diode conduction increases progressively rather than switching instantaneously, the peaks are rounded instead of being cut off abruptly.
+
+The 1N4148 silicon diodes have a forward voltage of approximately **0.6–0.7 V**, while the red LEDs have a substantially higher forward voltage of approximately **1.8 V**. The exact values vary with current, temperature, and the individual components.
+
+Lower-forward-voltage diodes begin clipping at a lower signal level, producing greater compression and a tighter, more saturated response. Higher-forward-voltage diodes allow the op-amp output to reach a greater amplitude before substantial clipping occurs, resulting in more output volume, greater headroom, less compression, and a more dynamic response.
+
+Amplification + clipping reduces the difference between louder and quieter portions of the signal. This compression can make the decaying portion of a note remain more consistent in volume and distortion character, which is often perceived as increased sustain.
+
+#### Clipping Switches and Configurations
+
+The **Tight/Open** switch selects between the silicon-diode network and the symmetric LED network:
+
+* **Tight** engages the 1N4148 silicon clipping selected by the Sym/Asym switch.
+* **Open** engages symmetric red-LED clipping and bypasses the Sym/Asym selection.
+
+The **Sym/Asym** switch only affects the silicon clipping network:
+
+* **Sym** uses one 1N4148 diode in each direction for the traditional symmetric TS808 configuration.
+* **Asym** uses one 1N4148 in one direction and two series-connected 1N4148 diodes in the opposite direction, producing different positive and negative clipping thresholds.
+
+| Tight/Open | Sym/Asym | Clipping configuration | General character |
+| --- | --- | --- | --- |
+| **Tight** | **Sym** | Symmetric silicon clipping | Traditional TS808-style clipping with relatively low headroom, moderate compression, and an even response on both halves of the waveform. |
+| **Tight** | **Asym** | Asymmetric silicon clipping | Unequal clipping thresholds produce slightly greater output, less uniform compression, and additional even-order harmonic content associated with a thicker, more textured sound. |
+| **Open** | Either position | Symmetric LED clipping | The higher clipping threshold provides substantially greater output, more headroom, reduced compression, and a more dynamic distortion response. |
+
+The three configurations were selected because they provide distinct but practical variations without moving too far from the original TS808 character.
 
 ### Active Tone Stage
 
-*To be expanded.*
+![Active tone and level-control schematic](Images/Software/Altium_Schematic_Tone_Volume.png)
 
-This section will describe:
+*Altium schematic of the fixed low-pass filter, active upper-frequency boost, Tone control, Treb Pass Through modification, and Level control.*
 
-* Original TS808 tone-control topology
-* Lower-frequency and upper-frequency signal paths
-* Active upper-frequency boost
-* Tone-pot operation
-* Tone-stage low-pass filtering
-* Treble Pass Through switching
+#### High-Level Function
 
-The Treble Pass Through switch raises the corner frequency of the tone-stage low-pass filter from approximately **720 Hz to 3.4 kHz**.
+This stage provides control over the pedal’s upper-midrange and treble response. It combines a passive low-pass filter with an active, frequency-dependent op-amp stage. The Tone potentiometer blends between the darker filtered interaction and the brighter actively boosted interaction, allowing the player to move gradually from substantial treble reduction to a more bright and present response.
 
-### Level Control and Output Buffer
+The selected signal is then passed to the Level potentiometer, which controls the overall output amplitude. The coupling and buffering circuitry surrounding the Level control prevents the DC bias and external load from substantially interfering with the tone circuit.
 
-*To be expanded.*
+#### Frequency-Dependent Signal Paths
 
-This section will describe:
+The tone stage contains two primary frequency-dependent paths. The first is a low pass filter formed by R9 and either C7 or C13, depending on the position of the Treb Pass Through switch. The output is connected to the non-inverting (`+`) input of the op-amp. This filter's corner frequency is around 720 Hz. It cuts upper mid and high frequencies and sends the rest through the remainder of the tone circuit.
 
-* Level-pot placement
-* Output-buffer operation
-* Output coupling
-* Output impedance
-* Interaction with the true-bypass wiring
+The second frequency-dependent path is formed by R12 and C8. This path can be reached from the initial low-pass-filtered path through one portion of the Tone potentiometer. C8 and R12 also interact with the op-amp feedback loop through the other side of the Tone potentiometer.
+
+#### Active Upper-Frequency Boost
+
+The op-amp is configured as a non-inverting amplifier. R11 forms the feedback resistance, while the Tone potentiometer, R12, and C8 form the frequency-dependent path from the inverting input to ground. Initially, it is helpful to analyze this portion of the circuit assuming the Tone pot is positioned all the way clockwise, giving a direct path from the feedback loop through C8 and R12 to ground.
+
+At lower frequencies, C8 has relatively high capacitive reactance. This restricts current through the feedback path to ground and causes the op-amp gain to remain close to 1.
+
+At higher frequencies, C8’s reactance decreases, leaving R12 as the primary resistance in the feedback path to ground. The high-frequency gain can then be approximated as:
+
+`Gain = 1 + (R11 / R12)`
+
+Using the selected component values, the maximum high-frequency gain is approximately **5.5**. This means the active path can amplify upper-frequency content by roughly five times relative to its low-frequency gain.
+
+However, this does not mean the pedal’s final treble output is five times greater than the original guitar signal. The active boost occurs after the R9 and C7/C13 low-pass filter, which has already reduced some of the upper-frequency content. The final response results from the interaction between the initial low-pass filter, active high-frequency boost, Tone-pot position, and surrounding circuit impedances.
+
+Although this simplified analysis does not capture every interaction in the circuit, it provides an intuitive explanation of how the tone stage can move between substantial treble reduction and an actively emphasized upper-frequency response.
+
+#### Tone-Pot Operation
+
+With the Tone control turned fully counterclockwise, its wiper is positioned toward the passive low-pass side of the circuit. This effectively puts C8 and R21 in parallel with C7 or C13. This leads to a stronger reduction in upper-midrange and treble content. Simultaneously, the Tone pot's full resistance is contributed to `Rg` and the gain of the non-inverting op amp is reduced close to unity. These interactions produce a much darker, muted output.
+
+With the Tone potentiometer turned fully clockwise, upper frequencies are actively boosted, providing substantially more upper-midrange and treble content. At the same time, 
+the Tone potentiometer reduces current flow through C8 and R12, preventing higher frequencies from being cut as dramatically. This results in a significantly brighter and potentially harsh output.
+
+Intermediate settings blend the two responses nicely, allowing the player to adjust the pedal continuously between a darker, more heavily filtered sound and a brighter, more present sound.
+
+#### Treb Pass Through Switching
+
+S1 and C13 form the **Treb Pass Through** modification. The SPDT switch selects the capacitor used with R9 in the tone-stage low-pass filter:
+
+* Selecting C7 restores the original TS808-style corner frequency of approximately **720 Hz**.
+* Selecting C13 raises the corner frequency to approximately **3.4 kHz**.
+
+Raising the corner frequency allows substantially more upper-frequency content to reach the active tone circuit. C13 was selected to provide noticeably greater clarity, presence, and transparency without making the pedal excessively harsh or fizzy.
+
+The Treb Pass Through switch changes the signal entering both sides of the Tone control. The Tone potentiometer continues to provide its normal dark-to-bright adjustment, but the overall available frequency range is extended when C13 is selected.
+
+#### Level Control
+
+After the Tone control selects the desired blend of passive and active responses, the AC signal is coupled to the Level potentiometer. The Level pot is configured as a voltage divider between the tone-stage output and ground.
+
+At lower settings, a larger portion of the signal is directed toward ground and a smaller signal is taken from the wiper. Turning the Level control clockwise increases the proportion of the signal passed to the output buffer.
+
+The Level control only attenuates the available signal; it does not provide additional gain. Its purpose is to set the final pedal output volume after the distortion and tone-shaping stages.
+
+### Output Buffer
+
+![Output buffer schematic](Images/Software/Altium_Schematic_Output_Buffer.png)
+
+*Altium schematic of the BJT output buffer, output coupling capacitor, pull-down resistor, and output jack.*
+
+#### Purpose and Impedance
+
+The output buffer performs a function similar to the [Input Buffer](#input-buffer), but its design priorities are slightly different. An extremely high input impedance is less critical here because the buffer is driven by the low-impedance tone-stage op-amp through the Level control rather than directly by passive guitar pickups. 
+
+Greater emphasis is placed on producing a low output impedance so the pedal can reliably drive an amplifier, another pedal, and the capacitance of the connected cable without significant signal loss or unwanted filtering.
+
+The BJT uses essentially the same emitter-follower configuration as the input buffer. It provides a voltage gain close to 1 while increasing the available current drive and lowering the signal’s output impedance. See the [Input Buffer](#input-buffer) section for a more detailed explanation of emitter-follower operation.
+
+#### Final Signal Preparation
+
+The BJT emitter operates at a positive DC bias, but other pedals and amplifiers generally expect an audio signal centered around 0 V. C11 acts as the final coupling capacitor, blocking the buffer’s DC bias while allowing the AC guitar signal to pass to the output jack.
+
+R17 is connected between the output side of C11 and ground. It establishes a 0 V DC reference and gives C11 a path to discharge when no output cable is connected. This prevents the output node from floating and helps reduce loud pops when connecting the pedal to other equipment.
+
+C11, R17, and the input impedance of the connected equipment form a high-pass filter. Their values were selected to place the filter corner below the desired guitar-frequency range, preventing noticeable bass loss. The surrounding buffer components were selected to maintain a stable operating point and sufficiently low output impedance.
+
+The prepared signal is delivered through the tip of the mono output jack, while the sleeve provides the ground connection.
 
 ### True-Bypass and LED Circuit
 
-*To be expanded.*
+#### 3PDT Switching
 
-This section will describe:
+Several mechanical true-bypass wiring arrangements are commonly used and can be found online. A 3PDT footswitch is especially useful when true-bypass signal routing, effect-input grounding, and LED indication must all be controlled by one switch.
 
-* Mechanical signal routing
-* Effect and bypass states
-* Status LED switching
-* LED current limiting
-* Input and output jack connections
+A 3PDT switch contains three electrically independent poles that change state together. Each pole has a center common lug that connects to one of two outer lugs depending on the footswitch position. The switches purchased for this project included small breakout PCBs that simplify these connections and reduce the amount of point-to-point wiring required during assembly.
+
+In this implementation, the three center connections correspond to the input jack, ground, and output jack. Pressing the footswitch connects these points to one of two sets of switched contacts.
+
+#### Bypass State
+
+When the effect is bypassed, the input jack is connected directly to the output jack. The guitar signal therefore travels through the mechanical switch without passing through the pedal’s input buffer, clipping stage, tone circuit, or output buffer.
+
+At the same time, the effect-circuit input is connected to ground. Grounding the unused input prevents it from floating, where it could collect noise or create unpredictable behavior that becomes audible when the effect is re-engaged.
+
+“True bypass” refers to the audio signal being disconnected from the effect circuit. The internal circuit may remain electrically powered even while bypassed, but it is removed from the active guitar-signal path.
+
+#### Effect State
+
+When the effect is engaged, the input jack is connected to the effect-circuit input and the effect-circuit output is connected to the output jack. The guitar signal then passes through the complete pedal circuit before continuing to the next pedal or amplifier.
+
+The third pole completes the status-LED circuit, illuminating the LED to indicate that the effect is active.
+
+#### LED Current Limiting
+
+An LED requires a series current-limiting resistor to prevent excessive current from damaging the LED or placing unnecessary load on the power supply. The required resistance depends on the supply voltage, the LED’s forward voltage, and the desired operating current:
+
+`R = (Vsupply - Vf) / ILED`
+
+The LED forward voltage depends on its color and construction, while the selected current determines its brightness. In practice, a standard resistor value at or above the calculated resistance should be selected to keep the LED within its rated current. A lower-current operating point is often sufficient for a pedal indicator and reduces power consumption.
+
+#### True Bypass Versus Buffered Bypass
+
+Some pedals use buffered bypass, meaning the guitar signal continues to pass through an active buffer even when the effect itself is disabled. This can provide a low output impedance that helps drive long cables and other pedals, but it also means the bypassed signal is not completely isolated from the pedal’s electronics.
+
+The 808 EQ+ does not use buffered bypass. When bypassed, the guitar signal follows a passive mechanical path directly from the input jack to the output jack. The pedal’s input and output buffers are only part of the signal path while the effect is engaged.
 
 ---
 
