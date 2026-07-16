@@ -7,7 +7,7 @@ For the project overview, controls, build information, repository guide, and cur
 ## Table of Contents
 
 <details>
-<summary><strong><a href="#design-and-prototyping-process">Design and Prototyping Process</a></strong></summary>
+<summary><strong><a href="#design-and-prototyping-overview">Design and Prototyping Overview</a></strong></summary>
 
 * [1. Circuit Research and Part-by-Part Analysis](#1-circuit-research-and-part-by-part-analysis)
 * [2. Original TS808 Simulation and Breadboard Prototype](#2-original-ts808-simulation-and-breadboard-prototype)
@@ -36,12 +36,13 @@ For the project overview, controls, build information, repository guide, and cur
 <details>
 <summary><strong><a href="#pcb-design">PCB Design</a></strong></summary>
 
+* [Process Overview](#process-overview)
 * [Design Priorities](#design-priorities)
 * [Library Development](#library-development)
-* [Through-Hole Construction](#through-hole-construction)
+* [Through-Hole Components](#through-hole-components)
 * [Socketed and Replaceable Components](#socketed-and-replaceable-components)
-* [Grounding and Routing](#grounding-and-routing)
-* [Fabrication Files](#fabrication-files)
+* [Routing and Grounding](#routing-and-grounding)
+* [Manufacturer Selection and Design Files](#manufacturer-selection-and-design-files)
 
 </details>
 
@@ -51,30 +52,16 @@ For the project overview, controls, build information, repository guide, and cur
 * [Why Use a Printed Enclosure?](#why-use-a-printed-enclosure)
 * [Component-Driven Design](#component-driven-design)
 * [Printed Labels and Graphics](#printed-labels-and-graphics)
-* [Filament Colors](#filament-colors)
 * [Multi-Color Printing](#multi-color-printing)
-* [Current Print Status](#current-print-status)
+* [Final Print Files and Recommended Settings](#final-print-files-and-recommended-settings)
 
 </details>
-
-<details>
-<summary><strong><a href="#testing-and-experimental-results">Testing and Experimental Results</a></strong></summary>
-
-* [Breadboard Testing](#breadboard-testing)
-* [Frequency-Response Testing](#frequency-response-testing)
-* [Clipping Tests](#clipping-tests)
-* [Prototype Validation Summary](#prototype-validation-summary)
-* [Validation Summary](#validation-summary)
-
-</details>
-
-<p><strong><a href="#planned-additions">Planned Additions</a></strong></p>
 
 <p><strong><a href="README.md">Return to the Main README</a></strong></p>
 
 ---
 
-## Design and Prototyping Process
+## Design and Prototyping Overview
 
 The 808 EQ+ was developed through several stages, beginning with an in-depth study of the original TS808 circuit and progressing through simulation, breadboarding, measurement, perfboard prototyping, PCB design, enclosure modeling, and final assembly.
 
@@ -100,34 +87,30 @@ Each major section of the TS808 circuit was analyzed separately, including:
 * Bypass behavior
 * And other small intricacies
 
-This research established a known working baseline and made it possible to evaluate later modifications without losing track of the original circuit behavior.
-
-The part-by-part analysis was also used to identify modern components that could replace less-available original parts while preserving their electrical function.
+This research established a known working baseline and made it possible to evaluate later modifications without losing track of the original circuit behavior. The part-by-part analysis was also used to identify modern components that could replace less-available original parts while preserving their electrical function.
 
 ### 2. Original TS808 Simulation and Breadboard Prototype
 
-The development process began with a publicly available schematic of the original TS808 circuit. That unmodified circuit was first recreated in LTspice and then assembled on a breadboard using the original topology and modern, functionally equivalent components.
+The development process began with a publicly available schematic of the original [TS808 circuit](https://electrosmash.mas-effects.com/ElectroSmash%20-%20Tube%20Screamer%20Circuit%20Analysis.pdf). That unmodified circuit was first recreated in LTspice and then assembled on a breadboard using the original topology and modern, functionally equivalent components.
 
-Establishing a working unmodified circuit *first* provided a reference against which every later change could be evaluated. Full-size potentiometers, audio jacks, and a Dc barrel jack were integrated into the breadboard during this stage so the circuit could be evaluated as a complete pedal system.
+Establishing a working unmodified circuit *first* provided a reference against which every later change could be evaluated. Full-size potentiometers, audio jacks, and a DC barrel jack were integrated into the breadboard during this stage so the circuit could be evaluated as a complete pedal system.
 
-The breadboard stage facilitated the analysis of...
+The breadboard stage facilitated the analysis of:
 
 * Basic signal flow
 * Input and output buffer operation
 * Bias voltages
-* Drive-control behavior
-* Tone-control behavior
-* Level-control behavior
+* Drive, Tone, and Level control behavior
 * Symmetric silicon clipping
 * Practical operation with a guitar and amplifier
 
-Images were not captured of the original unmodified LTspice circuit or breadboard prototype. However, images shown in the following section display the later circuit after the selected EQ+ modifications had been integrated.
+Images were not captured of the original unmodified LTspice circuit or breadboard prototype. However, images shown in the following section display the final circuit with the integrated EQ+ modifications.
 
 ### 3. Frequency-Response and Clipping Experiments
 
 After the original circuit was operating correctly, the breadboard and LTspice models were modified one component and one circuit branch at a time.
 
-The goal was to strike a useful balance between preserving the original TS808 character and adding meaningful tone-shaping options. The modifications were intended to be clearly audible without becoming either extreme or underwhelming.
+The goal was to strike a useful balance between preserving the original TS808 character and adding meaningful tone-shaping options. The modifications were intended to be clearly audible without becoming either extreme or lackluster.
 
 An Analog Discovery 2 and WaveForms software were used to examine:
 
@@ -145,13 +128,13 @@ Final design decisions were made using a combination of circuit theory and analy
 
 ![Modified 808 EQ+ LTspice circuit](Images/Software/LTspice_Circuit.png)
 
-*The circuit shown above is the final LTspice model containing the selected 808 EQ+ modifications, rather than the original unmodified TS808 simulation.*
+*The circuit shown above is the final LTspice model containing the selected 808 EQ+ modifications.*
 
-Much of the Bass Pass Through and Treb Pass Through development involved swapping capacitor and resistor values, adding new components, and testing those components at different points in the signal path.
+Much of the Bass Pass Through and Treble Pass Through development involved swapping capacitor and resistor values, adding new components, and testing those components at different points in the signal path. 
 
-The Bass Pass Through was designed to let enough low end through to give the guitar a thicker, fuller underbelly without making the distorted low frequencies excessively strong or muddy. The selected configuration lowers the distortion-stage high-pass corner from approximately **720 Hz to 410 Hz**.
+The final bass switch was implemented with a SPDT mechanical switch that swaps between C5 (default) and C12 (modified). The Bass Pass Through was designed to let enough low end through to give the guitar a thicker, fuller underbelly without making the distorted low frequencies excessively strong or muddy. The selected configuration lowers the distortion-stage high-pass corner from approximately **720 Hz to 410 Hz**.
 
-The Treb Pass Through was designed to give the pedal a significantly more transparent and open sound without making it excessively harsh or fizzy. The selected configuration raises the tone-stage low-pass corner from approximately **720 Hz to 3.4 kHz**.
+The final treble switch was implemented with a SPDT mechanical switch that swaps between C7 (default) and C13 (modified). The Treble Pass Through was designed to give the pedal a significantly more transparent and open sound without making it excessively harsh or fizzy. The selected configuration raises the tone-stage low-pass corner from approximately **720 Hz to 3.4 kHz**.
 
 The clipping-stage experiments compared several arrangements of LEDs and 1N4148 silicon diodes. These included symmetric and asymmetric configurations of each diode type, as well as arrangements that mixed LED and silicon diodes. The final configurations were selected because each provided a distinct and musically useful response.
 
@@ -176,7 +159,7 @@ After the breadboard design was stable, it was transferred to perfboard to creat
 
 ![Perfboard layout](Images/Software/Perfboard_DIYLayout.png)
 
-The purpose of the perfboard stage was to:
+The purpose of this design stage was to:
 
 * Consolidate the circuit
 * Integrate the true bypass foot switch
@@ -184,15 +167,14 @@ The purpose of the perfboard stage was to:
 * Test the design in a more durable and portable pedal format
 * Confirm the final circuit before beginning PCB design
 
-The first enclosure prototype was intentionally faceless and focused primarily on fit and function rather than appearance. It provided a practical way to mount the circuit and controls before committing to the custom PCB and final enclosure design.
+The first 3D-printed enclosure prototype was developed in Autodesk Fusion 360 and focused primarily on fit and function rather than appearance. It provided a practical way to mount the circuit and controls before committing to the custom PCB and final enclosure design.
 
 The perfboard + test enclosure prototype was used to confirm:
 
 * Basic effect operation
 * True bypass functionality
 * Drive, Tone, and Level controls
-* Bass Pass Through behavior
-* Treb Pass Through behavior
+* Bass and Treble Pass Through behavior
 * Symmetric silicon clipping
 * Asymmetric silicon clipping
 * LED clipping
@@ -200,7 +182,7 @@ The perfboard + test enclosure prototype was used to confirm:
 * Practical off-board wiring
 * Overall sound and usability
 
-This validation established the final circuit configuration transferred to the custom PCB.
+This validation established the final circuit configuration that would then be transferred to a custom PCB.
 
 The perfboard circuit and faceless enclosure also exposed practical problems that were not as apparent during breadboard testing. These steps were helpful in understanding the intricacies of developing an intuitive, visually appealing, and reliable pedal. They allowed me to refine the physical circuit-assembly process, develop a more compact and easy-to-use enclosure, and configure 3D-printing settings that balanced appearance, dimensional accuracy, and functionality.
 
@@ -212,105 +194,41 @@ Considerable time was spent selecting quality components for the later revisions
 
 Many parts used in the early breadboard and perfboard prototypes came from bulk component variety kits. For the custom PCB revision, the goal was to source only the required parts, reduce unnecessary purchases, improve component consistency, and streamline assembly.
 
-Parts were compared through Octopart and supplier catalogs from DigiKey, LCSC, Tayda Electronics, Mouser, and other vendors. DigiKey was selected as the primary source for on-board electronic components because it offered all the required parts, reputable component quality, reasonable pricing, and the ability to consolidate the order through one supplier.
+Parts were compared through [Octopart](https://octopart.com/) and supplier catalogs from [DigiKey](https://www.digikey.com/), [LCSC](https://www.lcsc.com/), [Tayda Electronics](https://www.taydaelectronics.com/), [Mouser](https://www.mouser.com/en/), and other vendors. DigiKey was selected as the primary source for on-board electronic components because it offered all the required parts, reputable component quality, reasonable pricing, and the ability to consolidate the order through one supplier.
 
-The available options from these suppliers were less suitable for much of the off-board hardware. Love My Switches was selected for affordable, good-quality potentiometers and mono jacks. The SPDT toggle switches and true-bypass footswitches were purchased through Amazon because they were significantly less expensive and the parts had already proved reliable in the first prototype.
+The available options from these suppliers were less suitable for much of the off-board hardware. [Love My Switches](https://lovemyswitches.com/) was selected for affordable, good-quality potentiometers and mono jacks. The SPDT toggle switches and true-bypass footswitches were purchased through Amazon because they were significantly less expensive and the parts had already proved reliable in the first prototype.
 
 Each supplier was chosen by balancing component cost, quality, availability, and total shipping expense. Enough parts were purchased to build five pedals, which reduced the estimated per-pedal cost through quantity pricing and by spreading shipping costs across multiple builds.
 
+All components used in the final design, along with part numbers, quantities, suppliers, and estimated pricing, are listed in the [`808_EQ-Plus_Single_Pedal_BOM.xlsx`](Design/808_EQ-Plus_Single_Pedal_BOM.xlsx) file in the repository’s `Design` folder.
+
 ### 6. PCB Design in Altium Designer
 
-The validated circuit was transferred into Altium Designer.
+The validated circuit was redrawn and laid out in Altium Designer as a compact, reproducible through-hole PCB. The process converted the working prototype into a board that balanced enclosure fit, signal routing, hand-assembly accessibility, serviceability, and support for continued component experimentation.
 
-Many schematic symbols and PCB footprints were sourced from DigiKey. These resources were collected, reviewed, corrected where necessary, and assembled into organized project libraries. Custom components were created when a suitable existing symbol or footprint was not available.
+This stage included building and verifying the component libraries, organizing the circuit into functional blocks, optimizing component placement and routing, preparing clear assembly markings, checking the completed design, comparing fabrication services, and generating the required manufacturing files.
 
-Board size and component placement were optimized so the PCB would fit within a compact pedal enclosure. Components belonging to the same functional circuit block were kept near one another, while trace lengths, unnecessary crossings, and layer changes were minimized where practical. Footprint reference designators, value labels, and polarity markings were also aligned and oriented for easy reading during hand assembly and inspection.
-
-The PCB-design process included:
-
-* Collecting and organizing schematic symbols and PCB footprints
-* Verifying component pinouts, dimensions, and lead spacing
-* Correcting library components where necessary
-* Creating custom library components where necessary
-* Redrawing the complete schematic
-* Assigning components and designators
-* Defining the board shape
-* Placing through-hole components
-* Grouping components by functional circuit block
-* Minimizing board area, trace length, and unnecessary trace crossings
-* Aligning component labels for efficient assembly and inspection
-* Positioning off-board connection pads
-* Routing signal and power traces
-* Creating top and bottom ground pours
-* Running electrical-rule checks
-* Running PCB design-rule checks
-* Generating fabrication files
-* Reviewing the board in 2D and 3D
-* Reviewing manufacturer previews
-
-The board uses through-hole components to make hand assembly, inspection, repair, and experimentation more accessible.
-
-Note: Various components can be installed in machine-pin sockets rather than soldered permanently to ease tone experimentation, troubleshooting, and repair. Suggested components include Q1, Q2, U1, C12, C13, and diodes.
+For a complete discussion of the component libraries, construction choices, socketed parts, grounding, routing, manufacturer selection, and fabrication outputs, see [PCB Design](#pcb-design).
 
 ### 7. Enclosure Remodeling and Mechanical Integration
 
-The enclosure was remodeled in Fusion after the electronic design and prototype dimensions were better understood.
+After the electronic design and PCB dimensions were better understood, the enclosure was remodeled in Fusion around the physical requirements of the circuit and off-board hardware. Simplified models of the PCB, controls, switches, jacks, power connector, LED, and related hardware were used to refine component spacing, openings, internal clearance, wire routing, assembly access, and the overall enclosure dimensions.
 
-All enclosure components were modeled specifically for this project. No component models were imported.
+The resulting enclosure was designed specifically for 3D printing and incorporates the pedal’s mounting features, labels, graphics, custom knobs, LED holder, and removable bottom cover into a unified design.
 
-The modeled components included:
-
-* Potentiometers
-* Toggle switches
-* Footswitch
-* Input and output jacks
-* DC power connector
-* PCB
-* LED
-
-Nuts, washers, and fasteners were not modeled.
-
-These models made it possible to:
-
-* Optimize component spacing
-* Identify mechanical interference
-* Plan wire-routing clearance
-* Determine opening sizes
-* Determine jack and switch depth
-* Position the PCB
-* Refine the enclosure dimensions
-* Improve tool access during assembly
-
-The final enclosure design includes:
-
-* Labels and graphics inlaid flush with the enclosure surface
-* Custom printed knobs
-* A custom LED holder
-* Bottom-cover locating features
-* Mounting holes for enclosure-mounted components
-* Print-aware wall thicknesses and tolerances
-* A small access cutout that makes the bottom plate easier to remove after its screws have been removed
-
-The enclosure does not include an internal PCB mounting or support structure.
+For additional information about the modeling process, component placement, printed labels, materials, multi-color fabrication, tolerances, and print considerations, see [Enclosure Design and 3D Printing](#enclosure-design-and-3d-printing).
 
 ### 8. Final Assembly and Testing
 
-The final phase consists of:
+The final phase began with assembling the manufactured PCB, inspecting the solder joints, and verifying the orientation of polarized components. The completed board was then tested outside the enclosure so that electrical or assembly problems could be identified and corrected before the off-board components were mounted.
 
-* Assembling the manufactured PCB
-* Inspecting solder joints
-* Verifying power rails and bias voltages
-* Testing the PCB outside the enclosure
-* Mounting the off-board components
-* Completing the off-board wiring
-* Performing enclosure fit checks
-* Verifying all switch states
-* Testing bypass and effect operation
-* Evaluating noise, output level, and tone
-* Correcting mechanical or electrical issues
-* Releasing the final manufacturing and print files
+After confirming basic PCB operation, the controls, switches, jacks, LED, and other off-board components were installed. Enclosure fit, bypass operation, effect operation, and every switch configuration were evaluated alongside the pedal’s drive, output level, tone, and overall usability. Any mechanical or electrical issues identified during this process were corrected through further revisions.
 
-The PCB has been assembled and validated. Final enclosure fit testing and complete pedal validation are still in progress.
+The enclosure-printing process was also refined in Bambu Studio to improve appearance, dimensional accuracy, component fit, and overall functionality. 
+
+The completed PCB, enclosure, and assembled pedal have been fully tested and validated. Final fit checks confirmed that the PCB, off-board components, wiring, and printed enclosure function together as intended.
+
+The final manufacturing files, PCB files, CAD exports, print files, dimensional drawings, and other supporting design resources have been released and are available in the repository’s [`Design`](Design/) folder.
 
 ---
 
@@ -413,9 +331,9 @@ This section will describe:
 * Active upper-frequency boost
 * Tone-pot operation
 * Tone-stage low-pass filtering
-* Treb Pass Through switching
+* Treble Pass Through switching
 
-The Treb Pass Through switch raises the corner frequency of the tone-stage low-pass filter from approximately **720 Hz to 3.4 kHz**.
+The Treble Pass Through switch raises the corner frequency of the tone-stage low-pass filter from approximately **720 Hz to 3.4 kHz**.
 
 ### Level Control and Output Buffer
 
@@ -445,7 +363,20 @@ This section will describe:
 
 ## PCB Design
 
-The custom PCB translates the validated prototype into a more durable, reproducible, and serviceable format.
+The custom PCB was developed in Altium Designer to translate the validated prototype into a more durable, reproducible, and serviceable format.
+
+### Process Overview
+
+The PCB was developed through the following process:
+
+1. Collect, revise, and organize the required schematic symbols and PCB footprints.
+2. Redraw the complete schematic and assign the verified components, footprints, and designators.
+3. Define the board shape and systematically place the through-hole components.
+4. Position the off-board connection pads and orient component labels, values, and polarity markings for straightforward assembly.
+5. Route the signal and power traces, then create the top and bottom ground pours.
+6. Run electrical- and PCB-design-rule checks, correcting any identified problems.
+7. Review the completed board in both 2D and 3D.
+8. Generate the fabrication files and inspect the manufacturer previews before ordering.
 
 | PCB top                                           | PCB bottom                                              |
 | ------------------------------------------------- | ------------------------------------------------------- |
@@ -457,41 +388,25 @@ The PCB was designed around the following priorities:
 
 * Preserve the validated TS808-style circuit
 * Use readily solderable through-hole components
-* Keep related circuit stages physically organized
+* Grouping components by functional circuit block
 * Provide practical connection points for off-board wiring
 * Support component replacement and experimentation
 * Fit efficiently within the custom printed enclosure
-* Use ground pours to simplify ground distribution
-* Provide clear component designators and polarity markings
+* Minimize trace length, unnecessary crossings, and layer changes
+* Provide clearly aligned component designators, value labels, and polarity markings
 * Make fabrication possible through common prototype-PCB services
 
 ### Library Development
 
-Many schematic symbols and PCB footprints were sourced from DigiKey.
+Many schematic symbols and PCB footprints were sourced from DigiKey and collected into organized Altium project libraries. Each resource was reviewed for dimensional accuracy and checked against the corresponding component datasheet to verify its pinout, package dimensions, and lead spacing. Existing library components were corrected when necessary, and custom symbols or footprints were created when suitable resources were unavailable.
 
-These resources were:
+The completed Altium library files are available in the repository’s [`Design/PCB/Altium`](Design/PCB/Altium/) folder.
 
-* Collected into project libraries
-* Reviewed for dimensional accuracy
-* Checked against component datasheets
-* Verified for pinout and lead spacing
-* Corrected where necessary
-* Supplemented with custom components when a suitable model was unavailable
+### Through-Hole Components
 
-The library work primarily involved assembling, organizing, checking, and adapting available resources rather than creating every component from the beginning.
+Through-hole components were selected because they are relatively easy to solder by hand, inspect visually, and replace when necessary. They are also familiar to many hobbyists, readily available in small quantities, and compatible with machine-pin sockets for experimentation or repair. 
 
-### Through-Hole Construction
-
-Through-hole components were selected because they are:
-
-* Easier to solder manually
-* Easier to inspect visually
-* Easier to replace
-* Familiar to many hobbyists
-* Suitable for machine-pin sockets
-* Readily available in small quantities
-
-The larger board area required by through-hole parts was accepted as a worthwhile tradeoff for accessibility and serviceability.
+Although through-hole construction requires more board space than surface-mount construction, the increased accessibility and serviceability made the larger PCB area a worthwhile tradeoff.
 
 ### Socketed and Replaceable Components
 
@@ -508,39 +423,30 @@ This is useful for:
 
 Sockets should be used selectively. Permanently installing every component in a socket would increase cost, assembly time, contact resistance, and the risk of intermittent connections.
 
-### Grounding and Routing
+Suggested components for machine-pin sockets include Q1, Q2, U1, C12, C13, and the clipping diodes. These locations are especially useful for tone experimentation, troubleshooting, repair, and comparing compatible replacement components.
 
-The board uses copper pours on both sides for ground distribution.
+### Routing and Grounding
+
+The circuit’s typical current draw was measured at approximately **7–10 mA**. This range was entered into a PCB trace-width calculator, but the low current produced unusually narrow minimum-width recommendations. After researching trace widths commonly used by other guitar-pedal designers, wider traces were selected to provide more practical fabrication margins and greater physical robustness. The final layout uses **0.8 mm traces for the power rails** and **0.6 mm traces for signal paths**.
 
 Signal traces were routed with attention to:
 
 * Keeping related components close together
-* Minimizing unnecessary loop area
+* Minimizing board area and trace length
+* Reducing unnecessary trace crossings and layer changes
 * Separating sensitive signal paths from power wiring
-* Providing short return paths
 * Avoiding interference with through-hole pads
 * Maintaining fabrication clearances
 
-Additional detail about the board layout and signal routing will be added after the final revision is fully documented.
+The board uses copper pours on both sides for ground distribution.
 
-### Fabrication Files
+### Manufacturer Selection and Design Files
 
-The PCB-design process included:
+Several PCB manufacturers, including [OSH Park](https://oshpark.com/), [JLCPCB](https://jlcpcb.com/), [PCBWay](https://www.pcbway.com/orderonline.aspx), and [Elecrow](https://www.elecrow.com/pcb-manufacturing.html), were considered for producing the final board. Pricing, order quantities, fabrication options, shipping costs, turnaround time, and experiences reported by other hobbyists were compared. JLCPCB was ultimately selected because it offered an affordable option for the required boards and had received substantial positive feedback from other users online.
 
-* Redrawing the complete schematic
-* Assigning component designators
-* Defining the board shape
-* Placing through-hole components
-* Routing signal and power traces
-* Creating top and bottom ground pours
-* Positioning off-board connection pads
-* Running electrical-rule checks
-* Running PCB design-rule checks
-* Reviewing the design in 2D and 3D
-* Generating fabrication files
-* Reviewing manufacturer previews
+The relevant Altium project files, Gerber files, drill files, and other manufacturing outputs are available in the repository’s [`Design/PCB`](Design/PCB/) folder.
 
-Physical bare-PCB and assembled-PCB photographs will be added after final documentation is complete.
+*Physical bare-PCB and assembled-PCB photographs will be added after final documentation is complete.*
 
 ---
 
@@ -567,38 +473,16 @@ The main tradeoffs are:
 * Reduced impact resistance
 * Reduced temperature resistance
 * Reduced electromagnetic shielding
-* Longer fabrication time
+* Potentially longer fabrication time
 * Greater dependence on print orientation and tolerances
 
-Common 3D-printing plastics may soften, warp, or deform at temperatures that would not damage a metal enclosure.
+> **Warning:** Common 3D-printing plastics may soften, warp, or deform at temperatures that would not damage a metal enclosure.
 
 ### Component-Driven Design
 
-All enclosure-mounted components were modeled specifically for this project, including:
+All enclosure-mounted components were modeled specifically for this project, including the potentiometers, toggle switches, footswitch, input and output jacks, DC power connector, PCB boundary, and LED. No existing component models were imported. Nuts, washers, and other fasteners were excluded because their detailed geometry was not necessary for the enclosure design.
 
-* Potentiometers
-* Toggle switches
-* Footswitch
-* Input and output jacks
-* DC power connector
-* PCB
-* LED
-
-No component models were imported.
-
-The enclosure models did not include nuts, washers, or fasteners.
-
-The modeled components helped determine:
-
-* Hole diameters
-* Internal component spacing
-* PCB position
-* Wire-routing space
-* Footswitch clearance
-* Jack depth
-* Wall thickness
-* Bottom-cover geometry
-* Tool access during assembly
+These component models were used to determine the required hole diameters, internal spacing, PCB position, wire-routing space, footswitch clearance, jack depth, wall thickness, bottom-cover geometry, and tool access needed during assembly.
 
 | Component placement                                               | Enclosure interior                                                      |
 | ----------------------------------------------------------------- | ----------------------------------------------------------------------- |
@@ -613,7 +497,7 @@ The enclosure also includes:
 * Print-aware wall thicknesses and tolerances
 * A small access cutout that makes the bottom plate easier to remove after its screws have been removed
 
-The PCB is not mounted to an internal support structure. Its final position is determined by the connected controls and wiring arrangement.
+Dedicated PCB mounting features were intentionally omitted to simplify the enclosure design and final assembly process. Because the internal layout is compact, the PCB does not move freely once the pedal is fully assembled. The connected wiring constrains its position, while the bottom plate limits vertical movement and keeps the board mostly stationary inside the enclosure.
 
 ### Printed Labels and Graphics
 
@@ -621,191 +505,109 @@ The face labels and symbols are integrated into the enclosure model rather than 
 
 Contrasting filament is inlaid flush with the enclosure surface. The label geometry is designed to print against the build plate, producing a clean, flat front face without raised or recessed lettering.
 
-A smooth PEI plate was used to improve the finish and readability of the labels.
-
-A textured plate may also work, but it can produce:
-
-* A shinier surface texture
-* Less crisp lettering
-* More irregular edges
-* Blobbier or harder-to-read small text
-
-### Filament Colors
-
-The current design uses:
-
-* **White filament** for most of the enclosure and selected accents on the knobs and LED holder
-* **Black filament** for front-face accents and the primary color of the knobs and LED holder
-
-Other colors can be substituted without changing the mechanical design.
+A smooth PEI plate was used to improve the finish and readability of the labels. A textured plate may also work, but it can produce a shinier surface texture, less crisp lettering, more irregular edges, and blobbier or harder-to-read small text
 
 ### Multi-Color Printing
 
-The enclosure is designed for multi-color printing, but multi-color fabrication is not strictly required.
+The current design uses **white filament** for most of the enclosure and selected accents on the knobs and LED holder. **Black filament** is used for the front-face inlays and as the primary color of the knobs and LED holder.
 
-The Bambu H2S natively supports automatic multi-color printing. However, automated filament changes create purge waste.
+The Bambu H2S natively supports automatic multi-color printing, although each filament change produces additional purge waste. Because a single layer of black filament remained clearly visible against the white enclosure, the front-face inlays were intentionally made only one layer deep. This minimized the number of filament changes and reduced the amount of material wasted during purging.
 
-Possible alternatives include:
+The uploaded enclosure print files work best when the accent color is significantly darker than the primary enclosure color. Simply reversing the original color scheme would not produce an equivalent result. A single white inlay layer surrounded by black material would have poor opacity, appear closer to dark gray, and be much less visible than the black-on-white inlays.
 
-* Printing the enclosure in one color
-* Manually changing filament
-* Painting the label geometry
-* Filling the label geometry after printing
+Light or translucent accent colors should therefore be avoided when the primary enclosure color is dark. To use that type of color combination successfully, the inlay geometry should be modified to extend across additional layers, increasing its thickness and opacity. Other color combinations can be used without changing the enclosure’s overall mechanical design, provided that the contrast and opacity of the selected filaments are considered.
+
+Multi-color fabrication is not strictly required. Possible alternatives include:
+
+* Using recessed or raised labels and graphics
+* Manually changing filament when printing
+* Painting or filling the label geometry after printing
 * Printing separate label inserts
-* Omitting cosmetic accents
+* Omitting the cosmetic accents
 
-![Sliced enclosure](Images/Software/BambuStudio_Enclosure_Sliced_Iso.png)
+| Sliced enclosure | Sliced underside |
+| --- | --- |
+| ![Sliced enclosure](Images/Software/BambuStudio_Enclosure_Sliced_Iso.png) | ![Sliced underside of enclosure](Images/Software/BambuStudio_Enclosure_Sliced_Underside.png) |
 
-### Current Print Status
+### Final Print Files and Recommended Settings
 
-The most recent enclosure revision has not yet completed final physical validation.
+The enclosure design, print settings, tolerances, component fit, and appearance have been finalized and physically validated. The related files are available in the repository’s [`Design/3D_Printing`](Design/3D_Printing/) folder.
 
-Until testing is complete, the current model should be treated as a design revision rather than a guaranteed final print.
+The provided file types serve different purposes:
 
-The following files will be added after validation:
+* **STL files** contain the printable geometry for the enclosure and related parts. They can be imported into most slicers but do not preserve filament assignments, object placement, or slicer settings.
+* **3MF files** contain prepared Bambu Studio projects with the models, object arrangement, filament assignments, and tested slicer settings. These files provide the best starting point for reproducing the validated prints on a compatible Bambu printer.
 
-* Final Fusion source
-* STEP exports
-* STL exports
-* Dimensional drawings
-* Final Bambu Studio project
-* Recommended print settings
-* Material recommendations
-* Assembly notes
-* Tolerance and fit notes
+> [!CAUTION]
+> The provided files and settings do not guarantee identical results on every printer. Dimensional accuracy, tolerances, surface finish, and label clarity can vary with the printer, filament, build plate, calibration, environmental conditions, and slicer version.
+>
+> The enclosure was designed around the specific off-board components listed in the project BOM. Substituting potentiometers, switches, jacks, connectors, fasteners, or other hardware may introduce dimensional differences that affect fit and assembly. Printed parts may require adjustment or reprinting, and the inlaid graphics and labels may not appear as clear as expected on every setup.
+>
+> The following settings produced the best results during development and may provide a useful starting point for further printer-specific tuning.
 
----
+#### Importing, Positioning, and Model Preparation
 
-## Testing and Experimental Results
+When preparing the STL files manually:
 
-The circuit was evaluated through simulation, breadboard testing, Analog Discovery 2 measurements, perfboard construction, and practical guitar testing.
+1. Import the STL assembly containing the enclosure, inlays, and bottom plate.
+2. Use **Lay on Face** to place the assembly on the enclosure’s top surface so the inlays contact the build plate.
+3. Split the assembly into separate objects.
+4. Move the bottom plate beside the enclosure.
+5. Use **Lay on Face** to place the flat outer face of the bottom plate against the build plate.
+6. Assign the appropriate filament to each object:
+   * Assign filament 1 as the secondary accent color—black in the validated print.
+   * Assign filament 2 as the primary enclosure color—white in the validated print.
+   * In the **Objects** tab, assign the enclosure and bottom plate to the primary enclosure color.
 
-This section is intentionally separate from the main README so that detailed graphs and observations can be added without making the project landing page difficult to navigate.
+#### Filament Printing Sequence
 
-### Breadboard Testing
+The accent inlays should print before the primary enclosure material:
 
-The original TS808 circuit was first assembled and tested before modifications were introduced.
+1. Open the plate-specific customization settings.
+2. Set **First layer filament sequence** to **Customize**.
+3. Print the accent color first and the primary enclosure color second.
+4. If the inlays extend beyond the first layer, configure **Other layer filament sequence** in the same order.
 
-The breadboard stage was used to:
+#### Modified Global Settings
 
-* Confirm basic circuit operation
-* Evaluate modern replacement components
-* Compare the physical circuit with LTspice behavior
-* Test Drive, Tone, and Level operation
-* Experiment with filter values
-* Compare diode configurations
-* Evaluate switching arrangements
-* Test the circuit with a guitar and amplifier
+| Setting | Validated value |
+| --- | --- |
+| Initial-layer line width | 0.42 mm |
+| Seam position | Back |
+| Elephant-foot compensation | 0.08 mm |
+| Wall loops | 4 |
+| Bottom shell layers | 4 |
+| Internal solid infill pattern | Monotonic line |
+| Sparse infill density | 25% |
+| Sparse infill pattern | Cubic |
+| Initial-layer speed | 25 mm/s |
+| Support | Enabled |
+| Support type | Normal (auto) |
 
-Most of the final potentiometers, jacks, and temporary switching hardware were already used during the breadboard stage.
+#### Object-Specific Settings
 
-### Frequency-Response Testing
+For the enclosure and bottom plate:
 
-An Analog Discovery 2 was used to measure the frequency response of the circuit and compare component modifications.
+* Enable **Only one wall on first layer**.
+* Set **Bottom surface pattern** to **Monotonic Line**.
 
-Testing included:
+For the inlaid arrows and border:
 
-* Original TS808 response
-* Bass Pass Through values
-* Treb Pass Through values
-* Tone-control positions
-* Filter corner frequencies
-* Gain-stage response
-* Tone-stage response
+* Set **Bottom surface pattern** to **Concentric**.
+* Set **Seam position** to **Aligned**.
 
-The selected Bass Pass Through configuration shifts the distortion-stage high-pass corner from approximately **720 Hz to 410 Hz**.
+For the `9` object:
 
-The selected Treb Pass Through configuration shifts the tone-stage low-pass corner from approximately **720 Hz to 3.4 kHz**.
+* Set **Seam position** to **Aligned**.
 
-Future additions may include:
+#### Seam Painting
 
-* Bode plots
-* Overlay comparisons
-* Test settings
-* Component-value tables
-* Calculated and measured corner-frequency comparisons
+Seam placement is particularly important around the bottom plate’s locating pegs and the corresponding slots in the enclosure. Poorly positioned seams can make these features larger or more irregular than intended and interfere with assembly.
 
-### Clipping Tests
-
-The clipping configurations were evaluated using waveform measurements and practical listening tests.
-
-Testing included:
-
-* Symmetric silicon clipping
-* Asymmetric silicon clipping
-* Symmetric LED clipping
-* Output-amplitude comparisons
-* Positive and negative waveform limiting
-* Compression and sustain
-* Picking dynamics
-* Interaction with the Drive control
-* Interaction with external boosts and amplifiers
-
-Future additions may include:
-
-* Oscilloscope captures
-* Input and output waveform overlays
-* Clipping-threshold comparisons
-* Harmonic observations
-* Level-normalized audio samples
-
-### Prototype Validation Summary
-
-The perfboard prototype was used to confirm:
-
-* Basic effect operation
-* Mechanical true bypass
-* Drive, Tone, and Level controls
-* Bass Pass Through behavior
-* Treb Pass Through behavior
-* Symmetric silicon clipping
-* Asymmetric silicon clipping
-* LED clipping
-* Switch interaction
-* Practical off-board wiring
-* Overall sound and usability
-
-The prototype established the circuit configuration transferred to the custom PCB.
-
-### Validation Summary
-
-| Test area                   | Status                   |
-| --------------------------- | ------------------------ |
-| Original circuit simulation | Complete                 |
-| Original breadboard circuit | Complete                 |
-| Bass modification           | Prototype verified       |
-| Treble modification         | Prototype verified       |
-| Symmetric silicon clipping  | Prototype verified       |
-| Asymmetric silicon clipping | Prototype verified       |
-| LED clipping                | Prototype verified       |
-| Perfboard prototype         | Complete                 |
-| True-bypass operation       | Prototype verified       |
-| Production PCB              | Assembled and validated  |
-| Latest enclosure revision   | Final validation pending |
-| Complete final pedal        | Final validation pending |
+* Paint the seam on each bottom-plate peg so it faces toward the center of the bottom plate.
+* Verify that the corresponding peg slots in the enclosure do not contain seams that could interfere with insertion.
+* If desired, align the enclosure’s outer seam with the bottom plate’s outer seam for a more consistent appearance.
 
 ---
-
-## Planned Additions
-
-This document may later include:
-
-* Complete stage-by-stage circuit explanations
-* Annotated schematic images
-* Filter equations
-* Gain calculations
-* Bias-voltage measurements
-* Analog Discovery 2 Bode plots
-* Clipping waveform captures
-* LTspice comparisons
-* PCB connector assignments
-* PCB fabrication notes
-* Physical PCB photographs
-* Mechanical dimension drawings
-* Print orientation diagrams
-* Final slicer settings
-* Enclosure tolerance notes
-* Audio demonstrations
-* Final validation results
 
 Return to the [main project README](README.md).
