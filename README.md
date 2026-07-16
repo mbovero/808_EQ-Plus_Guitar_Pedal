@@ -314,32 +314,47 @@ The planned process is:
 
 ## Credits and References
 
-The 808 EQ+ is based on the established Tube Screamer 808 circuit topology.
+### Project Basis and Attribution
 
-The underlying Tube Screamer circuit was not invented as part of this project. The original contribution of this project is the specific recreation, component selection, switchable modifications, PCB implementation, mechanical design, printed enclosure, documentation, and fabrication workflow.
+The 808 EQ+ is based on the established Tube Screamer 808 circuit topology. The underlying Tube Screamer circuit was not invented as part of this project.
 
-The project draws on publicly available educational material concerning:
+The original contributions of this project include the specific circuit recreation, modern component selection, switchable tone and clipping modifications, PCB implementation, mechanical design, printed enclosure, documentation, and fabrication workflow.
 
-* TS808 circuit analysis
-* Op-amp feedback-loop clipping
-* Active tone controls
-* Transistor buffering
-* Analog filter design
-* Guitar-pedal bypass wiring
-* Through-hole PCB design
-* Additive-manufacturing design practices
+Development drew on educational material covering TS808 circuit analysis, op-amp feedback-loop clipping, active tone controls, transistor buffering, analog filter design, guitar-pedal bypass wiring, through-hole PCB design, and additive-manufacturing practices.
 
-A detailed reference list and acknowledgments will be added before the final release.
+### Primary References
 
-Software and tools used during development include:
+Two resources were particularly helpful during the early research and circuit-analysis stages:
+
+* [**ElectroSmash**](https://electrosmash.mas-effects.com/) — The ElectroSmash Tube Screamer analysis provided a detailed stage-by-stage explanation of the original circuit, including its operating theory, filter behavior, gain calculations, clipping, buffering, and tone control.
+* [***Tracking Down Your Dream Tone — Build Your Own Guitar Effects Pedals: A Beginner’s Guide***](https://www.amazon.com/dp/B09ZCJLB9J) by Sascha Suhr — This book provided an accessible introduction to guitar-pedal electronics, circuit simulation, breadboard experimentation, component selection, practical construction, and troubleshooting.
+
+### Additional Online Resources
+
+The following websites, channels, and community forums were also consulted for circuit references, practical building information, equipment demonstrations, troubleshooting discussions, and perspectives from other pedal builders and guitarists:
+
+* [Beavis Audio Research](https://beavisaudio.com/)
+* [Analog Man](https://www.analogman.com/)
+* [That Pedal Show](https://www.youtube.com/thatpedalshow)
+* [GEO’s Effects](http://www.geofex.com/)
+* [Free Stompboxes](https://www.freestompboxes.org/)
+* [DIY Stompboxes](https://diystompboxes.com/wpress/)
+* [PedalPCB Community Forum](https://forum.pedalpcb.com/)
+* [The Gear Page](https://www.thegearpage.net/)
+
+Community discussions and subjective descriptions were used as practical references rather than definitive technical sources. Circuit behavior and design decisions were evaluated through component datasheets, circuit analysis, simulation, electrical measurements, and hands-on listening tests.
+
+### Software and Development Tools
+
+Software and equipment used during development included:
 
 * LTspice
 * Analog Discovery 2 and WaveForms
 * Altium Designer
-* Fusion
+* Autodesk Fusion
 * Bambu Studio
 * Bambu H2S
-* General electronic test and soldering equipment
+* General electronic test, soldering, and assembly equipment
 
 ---
 
