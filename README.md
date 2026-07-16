@@ -199,20 +199,18 @@ When the pedal is bypassed, the guitar signal is mechanically disconnected from 
 
 ## Technical Design and Testing Documentation
 
-Detailed documentation for the project’s development process, circuit, PCB, enclosure, printing process, and experimental measurements is maintained separately:
+Detailed documentation for the project’s development process and major design stages is maintained separately:
 
 * [Design, Prototyping, and Testing Documentation](DESIGN_AND_TESTING.md)
 
 The separate document includes:
 
 * Complete design and prototyping process
-* Circuit-design notes
+* In-depth circuit design
 * PCB construction
 * Enclosure design and mechanical integration
 * 3D Printing considerations
-* Testing methodology
-* Experimental measurements and validation status
-* And more!
+* And plenty of information for curious minds
 
 This material is separated to keep the main project page more approachable while preserving a deeper technical explanation for interested readers.
 
