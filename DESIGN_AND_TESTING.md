@@ -28,7 +28,7 @@ For the project overview, controls, build information, repository guide, and cur
 * [Input Buffer](#input-buffer)
 * [Variable-Gain and Clipping Stage](#variable-gain-and-clipping-stage)
 * [Active Tone Stage](#active-tone-stage)
-* [Level Control and Output Buffer](#level-control-and-output-buffer)
+* [Output Buffer](#output-buffer)
 * [True-Bypass and LED Circuit](#true-bypass-and-led-circuit)
 
 </details>
