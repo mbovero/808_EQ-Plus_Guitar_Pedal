@@ -17,10 +17,6 @@ When more flexibility is desired, the added switches can extend the pedal’s ba
 * [Design Goals](#design-goals)
 * [Feature List](#feature-list)
 * [Controls and Operation](#controls-and-operation)
-  * [Main Controls](#main-controls)
-  * [Tone Switches](#tone-switches)
-  * [Clipping Switches and Configurations](#clipping-switches-and-configurations)
-  * [Bypass Switching](#bypass-switching)
 * [Technical Documentation](#technical-documentation)
 * [Build Your Own 808 EQ+](#build-your-own-808-eq)
 * [Warnings and Limitations](#warnings-and-limitations)
@@ -157,47 +153,22 @@ The 808 EQ+ pedal's primary features include:
 
 ## Controls and Operation
 
-### Main Controls
+The 808 EQ+ uses three knobs, four toggle switches, and a true-bypass footswitch.
 
-| Control   | Function                                                                                                                                                                                                                                                |
-| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Drive** | Adjusts the gain of the op-amp clipping stage. Higher settings increase signal amplification and drive the clipping diodes harder, producing more distortion and sustain.                                                                               |
-| **Tone**  | Controls the balance between the lower-frequency and higher-frequency paths in the TS808 active tone stage. Turning it down emphasizes the filtered, darker signal; turning it up increasingly emphasizes and actively boosts the upper-frequency path. |
-| **Level** | Sets the pedal’s final output volume after the clipping and tone stages.                                                                                                                                                                                |
+| Control | What it does |
+| --- | --- |
+| **Drive** | Sets the amount of distortion. Turn it up for more grit, compression, and sustain. |
+| **Tone** | Adjusts the pedal from darker and smoother to brighter and more present. |
+| **Level** | Sets the final output volume. Start low and adjust it to match or boost the volume with the effect engaged. |
+| **Tight / Open** | Selects a focused, more compressed sound or a louder, more dynamic sound. |
+| **Sym / Asym** | Changes the texture of Tight-mode distortion from smoother and more even to thicker and grittier. This switch has no effect in Open mode. |
+| **Cut / Treb** | Selects the traditional smoother treble response or adds clarity, presence, and sparkle. |
+| **Cut / Bass** | Selects the traditional tighter low end or adds fullness and weight. |
+| **Footswitch** | Turns the effect on or off. The LED lights while the effect is active; when it is off, the pedal uses true bypass. |
 
-### Tone Switches
+For the familiar TS808-style sound, flip all four toggle switches upward to select **Tight**, **Sym**, and both **Cut** settings. Lower the Level control before switching to Open mode because it can produce substantially more output.
 
-| Switch                | Function                                                                                                                                                                                                                                                    |
-| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Bass Pass Through** | Lowers the corner frequency of the high-pass filter in the distortion stage from approximately **720 Hz to 410 Hz**. This allows more bass into the clipped signal, adding fullness and bottom end without completely removing the original bass filtering. |
-| **Treb Pass Through** | Raises the corner frequency of the low-pass filter in the tone stage from approximately **720 Hz to 3.4 kHz**. This allows substantially more upper-frequency content through the circuit, increasing clarity, presence, and sparkle.                       |
-
-When both switches are turned off, the original TS808-style bass and treble filtering is restored, producing the familiar Tube Screamer mid hump.
-
-### Clipping Switches and Configurations
-
-The clipping controls use two switches:
-
-| Switch           | Function                                                                                                                                                                               |
-| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Tight / Open** | Selects between silicon-diode clipping and LED clipping. **Tight** engages one of the silicon configurations selected by the Sym/Asym switch. **Open** engages symmetric LED clipping. |
-| **Sym / Asym**   | Selects between symmetric and asymmetric silicon clipping while the Tight/Open switch is in the silicon-clipping position.                                                             |
-
-The Sym/Asym switch does not affect the LED configuration.
-
-The clipping diodes are located in the feedback loop of the main op-amp gain stage, as in the original TS808. Each configuration changes the signal level at which clipping begins and the way the positive and negative halves of the waveform are limited.
-
-| Tight/Open | Sym/Asym        | Clipping configuration      | General character                                                                                                                 |
-| ---------- | --------------- | --------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| **Tight**  | **Sym**         | Symmetric silicon clipping  | Traditional TS808-style response. Compressed, smooth, sustained, and relatively even on both halves of the waveform.              |
-| **Tight**  | **Asym**        | Asymmetric silicon clipping | Slightly greater output and a less uniform clipping shape. Adds some grit and is often described as feeling more amp-like.        |
-| **Open**   | Either position | Symmetric LED clipping      | A much higher clipping threshold provides more headroom, greater output volume, reduced compression, and a more dynamic response. |
-
-### Bypass Switching
-
-The 808 EQ+ uses a mechanical true-bypass footswitch.
-
-When the pedal is bypassed, the guitar signal is mechanically disconnected from the effect circuit and routed directly from the input jack to the output jack. This prevents the pedal’s active input and output buffers from affecting the bypassed guitar signal.
+For connection diagrams, detailed mode descriptions, recommended starting settings, power information, and troubleshooting help, see the [808 EQ+ User Manual](808_EQ-Plus_User_Manual.pdf).
 
 ---
 
