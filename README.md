@@ -22,8 +22,7 @@ When more flexibility is desired, the added switches can extend the pedal’s ba
   * [Clipping Switches and Configurations](#clipping-switches-and-configurations)
   * [Bypass Switching](#bypass-switching)
 * [Technical Design and Testing Documentation](#technical-design-and-testing-documentation)
-* [Bill of Materials, Tools, and Fabrication Information](#bill-of-materials-tools-and-fabrication-information)
-* [Planned Build Process](#planned-build-process)
+* [Build Your Own 808 EQ+](#build-your-own-808-eq)
 * [Known Limitations](#known-limitations)
 * [Credits and References](#credits-and-references)
 * [Disclaimer](#disclaimer)
@@ -218,77 +217,13 @@ This material is separated to keep the main project page more approachable while
 
 ---
 
-## Bill of Materials, Tools, and Fabrication Information
+## Build Your Own 808 EQ+
 
-Detailed component quantities, part numbers, vendor links, estimated prices, and fabrication information are provided in:
+If this project has made you curious about building an 808 EQ+ of your own, you are welcome to use the repository as a DIY construction resource. The project is intended for hobbyists who want to assemble the documented design, learn from it, or adapt it to suit their own ideas.
 
-* [`808_EQ-Plus_Single_Pedal_BOM.xlsx`](Design/808_EQ-Plus_Single_Pedal_BOM.xlsx)
-* [`808_EQ-Plus_Tools_and_Fabrication_Info.xlsx`](Design/808_EQ-Plus_Tools_and_Fabrication_Info.xlsx)
+At a high level, the process involves reviewing the schematic and bill of materials, choosing between the provided PCB and a perfboard build, obtaining the components, printing and checking the enclosure parts, assembling and testing the electronics, installing the off-board controls and connections, and completing final mechanical and functional checks with a guitar and amplifier.
 
-### Bill of Materials
-
-The single-pedal BOM is intended to identify the components required to produce one complete pedal.
-
-Depending on availability, many parts can be replaced with electrically and mechanically compatible alternatives.
-
-Substitutions should account for:
-
-* Electrical value
-* Voltage and power rating
-* Pinout
-* Package dimensions
-* Lead spacing
-* Polarity
-* Tolerance
-* Mechanical fit
-* Expected effect on the audio circuit
-
-### Tools and Equipment
-
-Not every item listed in the tools and fabrication spreadsheet is required.
-
-Some tools are optional conveniences, some can be replaced with equivalent products, and others are only necessary when modifying or troubleshooting the design.
-
-Examples of potentially optional items include:
-
-* Tweezers
-* Solid-core hookup wire
-* Solder sucker
-* Multiple filament colors
-* Smooth build plate
-* Dedicated bench power supply
-* Advanced measurement equipment
-
-A basic build requires suitable soldering equipment, common hand tools, a way to produce the PCB and enclosure, and a safe method of testing the completed circuit.
-
----
-
-## Planned Build Process
-
-A complete illustrated build guide will be added as the remaining project documentation is completed.
-
-The planned process is:
-
-1. Review the schematic, BOM, and build documentation.
-2. Order or fabricate the PCB.
-3. Obtain and inspect all electronic components.
-4. Print the enclosure, bottom cover, knobs, and LED holder.
-5. Confirm that printed parts and enclosure-mounted components fit correctly.
-6. Populate the lowest-profile PCB components.
-7. Install sockets for selected experimental components.
-8. Populate the remaining through-hole components.
-9. Inspect component orientation and solder joints.
-10. Test the power input and bias network.
-11. Verify important DC operating points.
-12. Test the populated PCB outside the enclosure.
-13. Mount the potentiometers, switches, jacks, LED, and footswitch.
-14. Complete the off-board wiring.
-15. Re-test the circuit before mounting the PCB.
-16. Mount and secure the PCB.
-17. Close the enclosure and inspect for mechanical interference.
-18. Verify bypass operation.
-19. Test every control and switch combination.
-20. Perform final guitar and amplifier testing.
+The complete [808 EQ+ DIY Build Guide](BUILD_GUIDE.md) brings together the component and tool lists, fabrication resources, PCB and perfboard options, recommended print settings, assembly guidance, staged testing, and troubleshooting information. Read through the guide before ordering parts or beginning construction.
 
 ---
 
