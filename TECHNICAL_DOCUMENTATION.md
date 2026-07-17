@@ -53,7 +53,7 @@ For the project overview, controls, build information, repository guide, and cur
 * [Component-Driven Design](#component-driven-design)
 * [Printed Labels and Graphics](#printed-labels-and-graphics)
 * [Multi-Color Printing](#multi-color-printing)
-* [Final Print Files and Recommended Settings](#final-print-files-and-recommended-settings)
+* [Final Print Files and Settings](#final-print-files-and-settings)
 
 </details>
 
@@ -711,104 +711,28 @@ A smooth PEI plate was used to improve the finish and readability of the labels.
 
 ### Multi-Color Printing
 
-The current design uses **white filament** for most of the enclosure and selected accents on the knobs and LED holder. **Black filament** is used for the front-face inlays and as the primary color of the knobs and LED holder.
+The enclosure graphics were designed as separate inlays that print flush with the front surface. Printing the enclosure face-down places both the enclosure and label geometry against the build plate, producing a unified surface without decals, raised lettering, or post-processing.
 
-The Bambu H2S natively supports automatic multi-color printing, although each filament change produces additional purge waste. Because a single layer of black filament remained clearly visible against the white enclosure, the front-face inlays were intentionally made only one layer deep. This minimized the number of filament changes and reduced the amount of material wasted during purging.
+The validated design uses shallow black inlays against a white enclosure. A dark accent remained clearly visible in a single layer, so the inlays could be kept thin to reduce filament changes and purge waste. The design is not limited to black and white, but contrast and opacity should guide other color choices. Light or translucent accents over a dark enclosure may require deeper inlays or a different finishing method to remain legible.
 
-The uploaded enclosure print files work best when the accent color is significantly darker than the primary enclosure color. Simply reversing the original color scheme would not produce an equivalent result. A single white inlay layer surrounded by black material would have poor opacity, appear closer to dark gray, and be much less visible than the black-on-white inlays.
-
-Light or translucent accent colors should therefore be avoided when the primary enclosure color is dark. To use that type of color combination successfully, the inlay geometry should be modified to extend across additional layers, increasing its thickness and opacity. Other color combinations can be used without changing the enclosure’s overall mechanical design, provided that the contrast and opacity of the selected filaments are considered.
-
-Multi-color fabrication is not strictly required. Possible alternatives include:
-
-* Using recessed or raised labels and graphics
-* Manually changing filament when printing
-* Painting or filling the label geometry after printing
-* Printing separate label inserts
-* Omitting the cosmetic accents
+Multi-color printing is optional; the enclosure can also be printed in one color or finished with painted, filled, raised, recessed, or separately printed labels. For filament assignments, print order, manual STL preparation, and other fabrication guidance, see [Part 3 of the build guide](BUILD_GUIDE.md#3-print-and-verify-the-enclosure-parts).
 
 | Sliced enclosure | Sliced underside |
 | --- | --- |
 | ![Sliced enclosure](Images/Software/BambuStudio_Enclosure_Sliced_Iso.png) | ![Sliced underside of enclosure](Images/Software/BambuStudio_Enclosure_Sliced_Underside.png) |
 
-### Final Print Files and Recommended Settings
+### Final Print Files and Settings
 
-The enclosure design, print settings, tolerances, component fit, and appearance have been finalized and physically validated. The related files are available in the repository’s [`Design/3D_Printing`](Design/3D_Printing/) folder.
+The final enclosure geometry, tolerances, component fit, and appearance were physically validated before the print files were released. The design was developed around the components listed in the project BOM and balances label clarity, structural strength, accessible assembly, and a compact internal layout.
 
-The provided file types serve different purposes:
+The repository's [`Design/3D_Printing`](Design/3D_Printing/) folder provides two types of print files:
 
-* **STL files** contain the printable geometry for the enclosure and related parts. They can be imported into most slicers but do not preserve filament assignments, object placement, or slicer settings.
-* **3MF files** contain prepared Bambu Studio projects with the models, object arrangement, filament assignments, and tested slicer settings. These files provide the best starting point for reproducing the validated prints on a compatible Bambu printer.
+* **STL files** contain the printable geometry and are intended for manual preparation in a compatible slicer.
+* **3MF files** preserve the prepared Bambu Studio project, including object arrangement, filament assignments, and the validated slicer configuration. They are the most direct starting point for a compatible Bambu printer.
 
-> [!CAUTION]
-> The provided files and settings do not guarantee identical results on every printer. Dimensional accuracy, tolerances, surface finish, and label clarity can vary with the printer, filament, build plate, calibration, environmental conditions, and slicer version.
->
-> The enclosure was designed around the specific off-board components listed in the project BOM. Substituting potentiometers, switches, jacks, connectors, fasteners, or other hardware may introduce dimensional differences that affect fit and assembly. Printed parts may require adjustment or reprinting, and the inlaid graphics and labels may not appear as clear as expected on every setup.
->
-> The following settings produced the best results during development and may provide a useful starting point for further printer-specific tuning.
+The modified print settings are modest adjustments intended to improve surface appearance, label clarity, dimensional consistency, and structural integrity rather than radically change the default print profile. Additionally, the documented settings are intended as a tested baseline rather than universal requirements. Every printer, filament, build plate, slicer version, and environment can produce different dimensional accuracy, surface finish, support behavior, and label clarity. Hardware that differs from the BOM may also require adjusted openings or tolerances.
 
-#### Importing, Positioning, and Model Preparation
-
-When preparing the STL files manually:
-
-1. Import the STL assembly containing the enclosure, inlays, and bottom plate.
-2. Use **Lay on Face** to place the assembly on the enclosure’s top surface so the inlays contact the build plate.
-3. Split the assembly into separate objects.
-4. Move the bottom plate beside the enclosure.
-5. Use **Lay on Face** to place the flat outer face of the bottom plate against the build plate.
-6. Assign the appropriate filament to each object:
-   * Assign filament 1 as the secondary accent color—black in the validated print.
-   * Assign filament 2 as the primary enclosure color—white in the validated print.
-   * In the **Objects** tab, assign the enclosure and bottom plate to the primary enclosure color.
-
-#### Filament Printing Sequence
-
-The accent inlays should print before the primary enclosure material:
-
-1. Open the plate-specific customization settings.
-2. Set **First layer filament sequence** to **Customize**.
-3. Print the accent color first and the primary enclosure color second.
-4. If the inlays extend beyond the first layer, configure **Other layer filament sequence** in the same order.
-
-#### Modified Global Settings
-
-| Setting | Validated value |
-| --- | --- |
-| Initial-layer line width | 0.42 mm |
-| Seam position | Back |
-| Elephant-foot compensation | 0.08 mm |
-| Wall loops | 4 |
-| Bottom shell layers | 4 |
-| Internal solid infill pattern | Monotonic line |
-| Sparse infill density | 25% |
-| Sparse infill pattern | Cubic |
-| Initial-layer speed | 25 mm/s |
-| Support | Enabled |
-| Support type | Normal (auto) |
-
-#### Object-Specific Settings
-
-For the enclosure and bottom plate:
-
-* Enable **Only one wall on first layer**.
-* Set **Bottom surface pattern** to **Monotonic Line**.
-
-For the inlaid arrows and border:
-
-* Set **Bottom surface pattern** to **Concentric**.
-* Set **Seam position** to **Aligned**.
-
-For the `9` object:
-
-* Set **Seam position** to **Aligned**.
-
-#### Seam Painting
-
-Seam placement is particularly important around the bottom plate’s locating pegs and the corresponding slots in the enclosure. Poorly positioned seams can make these features larger or more irregular than intended and interfere with assembly.
-
-* Paint the seam on each bottom-plate peg so it faces toward the center of the bottom plate.
-* Verify that the corresponding peg slots in the enclosure do not contain seams that could interfere with insertion.
-* If desired, align the enclosure’s outer seam with the bottom plate’s outer seam for a more consistent appearance.
+Detailed slicer settings, support checks, seam guidance, part orientation, and pre-assembly fit checks are maintained in [Part 3 of the build guide](BUILD_GUIDE.md#3-print-and-verify-the-enclosure-parts).
 
 ---
 
