@@ -386,7 +386,7 @@ The following settings are starting points, not rules. Control positions may nee
 
 #### 1. Dynamic and Responsive
 
-My personal favorite setting is to engage both Bass Pass Through and Treb Pass Through, then select the LED clipping configuration. Start with Drive and Tone around **3 o’clock** and Level near its minimum.
+My personal favorite setting is to engage both Bass Pass Through and Treb Pass Through, then select the LED clipping configuration. Start with Drive and Tone around `1:30` and Level near its minimum.
 
 From there, adjust Drive until the distortion becomes most noticeable when you really dig into the strings. Adjust Level until the pedal is near unity gain, meaning the amplifier sounds approximately as loud with the effect engaged as it does in bypass.
 
