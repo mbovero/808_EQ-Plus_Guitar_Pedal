@@ -15,15 +15,15 @@ When more flexibility is desired, the added switches can extend the pedal’s ba
 * [What Is the 808 EQ+?](#what-is-the-808-eq)
 * [Why Build Another Tube Screamer?](#why-build-another-tube-screamer)
 * [Design Goals](#design-goals)
-* [Features](#features)
+* [Feature List](#feature-list)
 * [Controls and Operation](#controls-and-operation)
   * [Main Controls](#main-controls)
   * [Tone Switches](#tone-switches)
   * [Clipping Switches and Configurations](#clipping-switches-and-configurations)
   * [Bypass Switching](#bypass-switching)
-* [Technical Design and Testing Documentation](#technical-design-and-testing-documentation)
+* [Technical Documentation](#technical-documentation)
 * [Build Your Own 808 EQ+](#build-your-own-808-eq)
-* [Known Limitations](#known-limitations)
+* [Warnings and Limitations](#warnings-and-limitations)
 * [Credits and References](#credits-and-references)
 * [Disclaimer](#disclaimer)
 
@@ -138,15 +138,18 @@ This is not intended to be the simplest possible beginner soldering kit. It is a
 
 ---
 
-## Features
+## Feature List
 
-* Ability to return all added tone and clipping controls to a traditional TS808 configuration, using modern, functionally equivalent components throughout the circuit
+The 808 EQ+ pedal's primary features include:
+
+* Traditional TS808-style operation when the added tone and clipping controls are returned to their default positions
+* Modern, functionally equivalent components throughout the circuit
 * Independently switchable bass- and treble-response extensions
 * Three selectable diode-clipping configurations
-* True-bypass switching
+* Mechanical true-bypass switching
 * Custom through-hole PCB
 * Fully modeled and 3D-printed enclosure
-* Custom printed knobs, LED holder, labels, and graphics
+* Custom-printed knobs, LED holder, labels, and graphics
 * Design files, manufacturing files, and component information for hobbyist construction
 
 
@@ -198,11 +201,11 @@ When the pedal is bypassed, the guitar signal is mechanically disconnected from 
 
 ---
 
-## Technical Design and Testing Documentation
+## Technical Documentation
 
 Detailed documentation for the project’s development process and major design stages is maintained separately:
 
-* [Design, Prototyping, and Testing Documentation](DESIGN_AND_TESTING.md)
+* [Design, Prototyping, and Testing Documentation](TECHNICAL_DOCUMENTATION.md)
 
 The separate document includes:
 
@@ -227,7 +230,7 @@ The complete [808 EQ+ DIY Build Guide](BUILD_GUIDE.md) brings together the compo
 
 ---
 
-## Known Limitations
+## Warnings and Limitations
 
 ### Hobbyist 3D-Printed Enclosure Considerations
 

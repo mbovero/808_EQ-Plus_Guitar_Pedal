@@ -4,7 +4,7 @@ This guide provides a practical roadmap for building the 808 EQ+ guitar pedal fr
 
 It is not a step-by-step beginner course. Review the entire guide, the bill of materials, and the technical documentation before ordering parts or beginning assembly.
 
-For an overview of the pedal, see the [main README](README.md). For circuit theory, design decisions, PCB development, and enclosure details, see [Design, Prototyping, and Testing](DESIGN_AND_TESTING.md).
+For an overview of the pedal, see the [main README](README.md). For circuit theory, design decisions, PCB development, and enclosure details, see [Design, Prototyping, and Testing](TECHNICAL_DOCUMENTATION.md).
 
 ## Table of Contents
 
@@ -38,15 +38,15 @@ The enclosure was designed around the specific parts listed in the project BOM. 
 | Resource | Purpose |
 | --- | --- |
 | [Main README](README.md) | Project overview, features, controls, status, limitations, and general references |
-| [Design and Testing Documentation](DESIGN_AND_TESTING.md) | Circuit operation, prototype development, PCB design, enclosure design, and engineering details |
+| [Design and Testing Documentation](TECHNICAL_DOCUMENTATION.md) | Circuit operation, prototype development, PCB design, enclosure design, and engineering details |
 | [`808_EQ-Plus_Single_Pedal_BOM.xlsx`](Design/808_EQ-Plus_Single_Pedal_BOM.xlsx) | Components, quantities, part numbers, suppliers, and estimated single-pedal costs |
 | [`808_EQ-Plus_Tools_and_Fabrication_Info.xlsx`](Design/808_EQ-Plus_Tools_and_Fabrication_Info.xlsx) | Tools, equipment, fabrication resources, and estimated costs |
 | [`Design/PCB`](Design/PCB/) | Altium files, libraries, Gerber files, drill files, and other PCB manufacturing outputs |
 | [`Design/3D_Printing`](Design/3D_Printing/) | STL files, prepared 3MF projects, and other enclosure-printing resources |
 | [Complete schematic](Images/Software/Altium_Schematic.png) | Full electrical schematic for assembly and troubleshooting reference |
 | [Perfboard DIY layout](Images/Software/Perfboard_DIYLayout.png) | Layout used for the working perfboard prototype and a starting point for perfboard construction |
-| [PCB design documentation](DESIGN_AND_TESTING.md#pcb-design) | PCB construction, socketing, routing, grounding, and manufacturer-selection notes |
-| [Enclosure and printing documentation](DESIGN_AND_TESTING.md#enclosure-design-and-3d-printing) | Detailed enclosure-design rationale and print-development information |
+| [PCB design documentation](TECHNICAL_DOCUMENTATION.md#pcb-design) | PCB construction, socketing, routing, grounding, and manufacturer-selection notes |
+| [Enclosure and printing documentation](TECHNICAL_DOCUMENTATION.md#enclosure-design-and-3d-printing) | Detailed enclosure-design rationale and print-development information |
 
 ## Bill of Materials and Tools
 
@@ -104,10 +104,10 @@ Do not skip the intermediate fit and electrical checks. They make faults much ea
 Before ordering or assembling anything:
 
 1. Review the [main README](README.md) for a general overview of the project.
-2. Review the [complete schematic](Images/Software/Altium_Schematic.png) and relevant parts of the [technical documentation](DESIGN_AND_TESTING.md).
+2. Review the [complete schematic](Images/Software/Altium_Schematic.png) and relevant parts of the [technical documentation](TECHNICAL_DOCUMENTATION.md).
 3. Compare the BOM against the parts you already own and identify any intended substitutions.
 4. Decide whether to order the provided PCB or construct the circuit on perfboard.
-5. Decide whether the experimental components will be soldered directly or installed in machine-pin sockets. See [Socketed and Replaceable Components](DESIGN_AND_TESTING.md#socketed-and-replaceable-components) for guidance.
+5. Decide whether the experimental components will be soldered directly or installed in machine-pin sockets. See [Socketed and Replaceable Components](TECHNICAL_DOCUMENTATION.md#socketed-and-replaceable-components) for guidance.
 6. Decide whether to use the prepared 3MF project or prepare the STL files manually.
 7. Confirm that your selected circuit-board method and printer can produce the provided designs.
 
@@ -418,7 +418,7 @@ The best setting is the one that inspires you to keep playing, so experiment fre
 | Enclosure will not close | Component depth, wire routing, circuit-board position, locating-peg seams, bottom-plate alignment, and substituted hardware dimensions |
 | Labels are unclear | Build-plate surface, first-layer calibration, filament contrast, inlay depth, filament order, and initial-layer speed |
 
-For circuit-specific troubleshooting, use the stage diagrams and explanations in [Design, Prototyping, and Testing](DESIGN_AND_TESTING.md#circuit-design). Make one change at a time and re-test after each correction.
+For circuit-specific troubleshooting, use the stage diagrams and explanations in [Design, Prototyping, and Testing](TECHNICAL_DOCUMENTATION.md#circuit-design). Make one change at a time and re-test after each correction.
 
 ---
 
