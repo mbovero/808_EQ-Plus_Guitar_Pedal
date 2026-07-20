@@ -4,7 +4,7 @@ This guide provides a practical roadmap for building the 808 EQ+ guitar pedal fr
 
 It is not a step-by-step beginner course. Review the entire guide, the bill of materials, and the technical documentation before ordering parts or beginning assembly.
 
-For an overview of the pedal, see the [main README](README.md). For circuit theory, design decisions, PCB development, and enclosure details, see [Design, Prototyping, and Testing](TECHNICAL_DOCUMENTATION.md).
+For an overview of the pedal, see the [main README](README.md). For circuit theory, design decisions, PCB development, and enclosure details, see the [Technical Documentation](TECHNICAL_DOCUMENTATION.md).
 
 ## Table of Contents
 
@@ -29,7 +29,9 @@ For an overview of the pedal, see the [main README](README.md). For circuit theo
 This project combines analog electronics, circuit-board assembly, off-board wiring, mechanical assembly, and additive manufacturing. A successful build requires careful inspection and staged testing rather than assembling everything at once and troubleshooting only at the end.
 
 > [!CAUTION]
-> Use only a suitable regulated **9 V DC, center-negative supply**. The reverse-polarity diode helps protect the circuit from a supply with reversed polarity, but it does not protect against excessive input voltage. Disconnect power before modifying the circuit or handling exposed connections.
+> A regulated **9 V DC, center-negative pedal supply** is recommended. An external 9 V battery adapter is also supported if its 2.1 mm connector polarity is verified before use. Do not apply more than 9 V; the reverse-polarity diode helps protect against reversed polarity but not excessive input voltage.
+>
+> The enclosure has no internal battery compartment or automatic battery-disconnection feature. The circuit remains powered while bypassed, so disconnect an external battery when the pedal is not in use. Disconnect all power before modifying the circuit or handling exposed connections.
 
 The enclosure was designed around the specific parts listed in the project BOM. Electrically compatible substitutions may still differ in pinout, lead spacing, body size, shaft diameter, thread length, or mounting depth. Verify every substituted part before ordering or modifying the design files.
 
@@ -38,15 +40,16 @@ The enclosure was designed around the specific parts listed in the project BOM. 
 | Resource | Purpose |
 | --- | --- |
 | [Main README](README.md) | Project overview, features, controls, status, limitations, and general references |
-| [Design and Testing Documentation](TECHNICAL_DOCUMENTATION.md) | Circuit operation, prototype development, PCB design, enclosure design, and engineering details |
+| [808 EQ+ User Manual](808_EQ-Plus_User_Manual.pdf) | Connector layout, control descriptions, operating modes, starting settings, power guidance, and troubleshooting help |
+| [Technical Documentation](TECHNICAL_DOCUMENTATION.md) | Circuit operation, prototype development, PCB design, enclosure design, and engineering details |
 | [`808_EQ-Plus_Single_Pedal_BOM.xlsx`](Design/808_EQ-Plus_Single_Pedal_BOM.xlsx) | Components, quantities, part numbers, suppliers, and estimated single-pedal costs |
 | [`808_EQ-Plus_Tools_and_Fabrication_Info.xlsx`](Design/808_EQ-Plus_Tools_and_Fabrication_Info.xlsx) | Tools, equipment, fabrication resources, and estimated costs |
 | [`Design/PCB`](Design/PCB/) | Altium files, libraries, Gerber files, drill files, and other PCB manufacturing outputs |
 | [`Design/3D_Printing`](Design/3D_Printing/) | STL files, prepared 3MF projects, and other enclosure-printing resources |
 | [Complete schematic](Images/Software/Altium_Schematic.png) | Full electrical schematic for assembly and troubleshooting reference |
 | [Perfboard DIY layout](Images/Software/Perfboard_DIYLayout.png) | Layout used for the working perfboard prototype and a starting point for perfboard construction |
-| [PCB design documentation](TECHNICAL_DOCUMENTATION.md#pcb-design) | PCB construction, socketing, routing, grounding, and manufacturer-selection notes |
-| [Enclosure and printing documentation](TECHNICAL_DOCUMENTATION.md#enclosure-design-and-3d-printing) | Detailed enclosure-design rationale and print-development information |
+| [PCB Design section](TECHNICAL_DOCUMENTATION.md#pcb-design) | PCB construction, socketing, routing, grounding, and manufacturer-selection notes |
+| [Enclosure Design and 3D Printing section](TECHNICAL_DOCUMENTATION.md#enclosure-design-and-3d-printing) | Detailed enclosure-design rationale and print-development information |
 
 ## Bill of Materials and Tools
 
@@ -76,7 +79,7 @@ A basic build requires:
 * Suitable soldering equipment and solder
 * Flush cutters, wire strippers, and common hand tools
 * A multimeter
-* A regulated 9 V center-negative supply
+* A regulated 9 V center-negative pedal supply, which is recommended for assembly and testing
 * A method for producing the circuit board and printed enclosure parts
 * A safe method for testing the completed circuit
 
@@ -104,7 +107,7 @@ Do not skip the intermediate fit and electrical checks. They make faults much ea
 Before ordering or assembling anything:
 
 1. Review the [main README](README.md) for a general overview of the project.
-2. Review the [complete schematic](Images/Software/Altium_Schematic.png) and relevant parts of the [technical documentation](TECHNICAL_DOCUMENTATION.md).
+2. Review the [complete schematic](Images/Software/Altium_Schematic.png) and relevant parts of the [Technical Documentation](TECHNICAL_DOCUMENTATION.md).
 3. Compare the BOM against the parts you already own and identify any intended substitutions.
 4. Decide whether to order the provided PCB or construct the circuit on perfboard.
 5. Decide whether the experimental components will be soldered directly or installed in machine-pin sockets. See [Socketed and Replaceable Components](TECHNICAL_DOCUMENTATION.md#socketed-and-replaceable-components) for guidance.
@@ -229,7 +232,7 @@ Seam placement is especially important around the bottom plate’s locating pegs
 
 The knob and LED-holder settings are less critical than the enclosure settings. Place the flat top of each part against the build plate; this orientation allowed the validated parts to print without supports.
 
-Dimensional accuracy and component tolerance are more important for these parts, small slicer-setting changes may be necessary. Variations in LEDs, potentiometer shafts, filament behavior, and printer calibration may require minor dimensional adjustments to the models before the holder and knobs fit correctly.
+Dimensional accuracy and component tolerance are more important for these parts, so small slicer-setting changes may be necessary. Variations in LEDs, potentiometer shafts, filament behavior, and printer calibration may require minor dimensional adjustments to the models before the holder and knobs fit correctly.
 
 ### Fit Check Before Electronics Assembly
 
@@ -251,7 +254,7 @@ Whether using the manufactured PCB or perfboard, match every connection and comp
 
 If sockets will be used, install them before the surrounding components. Socket pins cannot be bent outward like ordinary component leads, so they are more difficult to hold in place while soldering. The 8-pin IC socket is recommended because it simplifies op-amp installation and replacement.
 
-Individual machine-pin sockets are purely optional. I found single sockets difficult enough to align and solder that I do not plan to use them extensively in future PCB builds. Their experimental flexibility may still be worthwhile for builders who plan to swap components out  often.
+Individual machine-pin sockets are purely optional. I found single sockets difficult enough to align and solder that I do not plan to use them extensively in future PCB builds. Their experimental flexibility may still be worthwhile for builders who plan to swap components out often.
 
 After any sockets are installed, populate the board from the lowest-profile components to the tallest. For the provided PCB:
 
@@ -276,7 +279,7 @@ Before wiring an SPDT switch, inspect its enclosure orientation, anti-rotation h
 
 3PDT wiring may vary depending on the bypass-switch hardware purchased. If a breakout board is included, review its intended wiring and compare it with the 808 EQ+ schematic and selected PCB or perfboard layout before soldering any wires. Both circuit-board layouts provide the connections needed for a compatible 3PDT true-bypass arrangement, including the effect input and output, audio jacks, ground, and LED-control connections.
 
-On the manufactured PCB, the pad labeled `9V` provides the filtered and reverse-polarity-protected 9 V output. This pad can be connected through a current-limiting resistor (CLR) to power the effect-status LED. 
+On the manufactured PCB, the pad labeled `9V` provides the filtered and reverse-polarity-protected 9 V output. This pad can be connected through a current-limiting resistor (CLR) to power the effect-status LED.
 
 ## 5. Test the Circuit Board Outside the Enclosure
 
@@ -288,7 +291,7 @@ Before applying power:
 
 * Check for an unintended short between the 9 V and ground rails.
 * Inspect the power-input polarity and 1N4007 orientation.
-* Recheck polarized components and the op-amp and BJTs' orientations.
+* Recheck polarized components and the orientations of the op-amp and BJTs.
 * Verify continuity through important ground and power connections.
 
 ### Initial Powered Checks
@@ -305,7 +308,7 @@ If available, use a current-limited bench supply for the first startup. Otherwis
 Test the circuit board with the prepared jack, control, and switch connections before mounting it permanently. Verify:
 
 * True-bypass signal flow, effect engagement, and LED indication
-* Clean signal flow through the active circuit
+* Continuous audio-signal flow through the active circuit
 * Drive, Tone, and Level operation
 * Bass and Treb Pass Through behavior
 * Symmetric silicon, asymmetric silicon, and LED clipping
@@ -380,13 +383,15 @@ At this point, the pedal is likely ready to go. Connect your guitar and amplifie
 
 Some variation in noise, frequency response, distortion, and output level is expected because of component tolerances, the power supply, guitar, pickups, cables, amplifier, and playing dynamics. These differences are part of what makes each setup—and each completed pedal—a little unique.
 
+For control-layout diagrams, complete mode descriptions, additional power information, and visual operating guidance, see the [808 EQ+ User Manual](808_EQ-Plus_User_Manual.pdf).
+
 ### Recommended Starting Points
 
 The following settings are starting points, not rules. Control positions may need to be adjusted for your guitar, pickups, amplifier, and preferred playing volume.
 
 #### 1. Dynamic and Responsive
 
-My personal favorite setting is to engage both Bass Pass Through and Treb Pass Through, then select the LED clipping configuration. Start with Drive and Tone around `1:30` and Level near its minimum.
+My personal favorite setting is to engage both Bass Pass Through and Treb Pass Through, then select **Open** for the LED clipping configuration. Start with Drive and Tone around `1:30` and Level near its minimum.
 
 From there, adjust Drive until the distortion becomes most noticeable when you really dig into the strings. Adjust Level until the pedal is near unity gain, meaning the amplifier sounds approximately as loud with the effect engaged as it does in bypass.
 
@@ -394,7 +399,7 @@ This setting responds well to picking dynamics. Softer playing can remain relati
 
 #### 2. Traditional TS808-Style Boost
 
-For a more traditional Tube Screamer application, disable Bass Pass Through and Treb Pass Through and select the Tight, symmetric silicon clipping configuration. This returns the pedal to its familiar TS808-style voicing and clipping behavior.
+For a more traditional Tube Screamer application, disable Bass Pass Through and Treb Pass Through, then select **Tight** and **Sym** for symmetric silicon clipping. This returns the pedal to its familiar TS808-style voicing and clipping behavior.
 
 Start with Drive around **9 o’clock**, Tone around **11–12 o’clock**, and Level above unity gain. This approach is commonly used to push an amplifier that is already beginning to distort. It tightens the low end, adds a touch of Tube Screamer soft clipping, and drives the amplifier input harder for additional grit and sustain.
 
@@ -418,7 +423,7 @@ The best setting is the one that inspires you to keep playing, so experiment fre
 | Enclosure will not close | Component depth, wire routing, circuit-board position, locating-peg seams, bottom-plate alignment, and substituted hardware dimensions |
 | Labels are unclear | Build-plate surface, first-layer calibration, filament contrast, inlay depth, filament order, and initial-layer speed |
 
-For circuit-specific troubleshooting, use the stage diagrams and explanations in [Design, Prototyping, and Testing](TECHNICAL_DOCUMENTATION.md#circuit-design). Make one change at a time and re-test after each correction.
+For circuit-specific troubleshooting, use the stage diagrams and explanations in the [Technical Documentation](TECHNICAL_DOCUMENTATION.md#circuit-design). Make one change at a time and re-test after each correction.
 
 ---
 

@@ -6,16 +6,12 @@ Most of the 808 EQ+ signal path closely replicates the original TS808 using mode
 
 When more flexibility is desired, the added switches can extend the pedal’s bass response, open its upper-frequency response, and select between three distinct clipping configurations.
 
-> [!IMPORTANT]
-> **Project status:** This project is still in progress. Not all README files are complete, and some sections are still missing information and images. The documentation will continue to be revised and expanded as the remaining prototypes, photographs, demonstrations, and guides are completed.
-
 ## Table of Contents
 
 * [Project Status](#project-status)
 * [What Is the 808 EQ+?](#what-is-the-808-eq)
 * [Why Build Another Tube Screamer?](#why-build-another-tube-screamer)
 * [Design Goals](#design-goals)
-* [Feature List](#feature-list)
 * [Controls and Operation](#controls-and-operation)
 * [Technical Documentation](#technical-documentation)
 * [Build Your Own 808 EQ+](#build-your-own-808-eq)
@@ -41,8 +37,8 @@ When more flexibility is desired, the added switches can extend the pedal’s ba
 * [x] Dimensional drawings uploaded
 * [ ] Final prototype, PCB, and pedal photographs added
 * [ ] Audio demonstrations added
-* [ ] Main README, technical documentation, and build guide completed
-* [ ] Polished user guide developed
+* [x] Main README, technical documentation, and build guide completed
+* [x] Polished user guide developed
 
 ---
 
@@ -75,6 +71,8 @@ The added controls can provide:
 * Considerably more treble, presence, and clarity
 * LED clipping with more headroom for dynamic distortion
 * Asymmetric silicon clipping with slightly greater output and a rougher, more amp-like character
+
+Beyond its expanded sound options, the project includes true-bypass switching, a custom through-hole PCB, and a fully modeled 3D-printed enclosure with custom knobs, an LED holder, integrated labels, and graphics. The repository also provides the design files, manufacturing files, and component information needed for hobbyist construction.
 
 ---
 
@@ -134,23 +132,6 @@ This is not intended to be the simplest possible beginner soldering kit. It is a
 
 ---
 
-## Feature List
-
-The 808 EQ+ pedal's primary features include:
-
-* Traditional TS808-style operation when the added tone and clipping controls are returned to their default positions
-* Modern, functionally equivalent components throughout the circuit
-* Independently switchable bass- and treble-response extensions
-* Three selectable diode-clipping configurations
-* Mechanical true-bypass switching
-* Custom through-hole PCB
-* Fully modeled and 3D-printed enclosure
-* Custom-printed knobs, LED holder, labels, and graphics
-* Design files, manufacturing files, and component information for hobbyist construction
-
-
----
-
 ## Controls and Operation
 
 The 808 EQ+ uses three knobs, four toggle switches, and a true-bypass footswitch.
@@ -164,7 +145,7 @@ The 808 EQ+ uses three knobs, four toggle switches, and a true-bypass footswitch
 | **Sym / Asym** | Changes the texture of Tight-mode distortion from smoother and more even to thicker and grittier. This switch has no effect in Open mode. |
 | **Cut / Treb** | Selects the traditional smoother treble response or adds clarity, presence, and sparkle. |
 | **Cut / Bass** | Selects the traditional tighter low end or adds fullness and weight. |
-| **Footswitch** | Turns the effect on or off. The LED lights while the effect is active; when it is off, the pedal uses true bypass. |
+| **Footswitch** | Turns the effect on or off. The LED lights while the effect is active; when it is off, true-bypass switching connects the input directly to the output. |
 
 For the familiar TS808-style sound, flip all four toggle switches upward to select **Tight**, **Sym**, and both **Cut** settings. Lower the Level control before switching to Open mode because it can produce substantially more output.
 
@@ -176,7 +157,7 @@ For connection diagrams, detailed mode descriptions, recommended starting settin
 
 Detailed documentation for the project’s development process and major design stages is maintained separately:
 
-* [Design, Prototyping, and Testing Documentation](TECHNICAL_DOCUMENTATION.md)
+* [Technical Documentation](TECHNICAL_DOCUMENTATION.md)
 
 The separate document includes:
 
@@ -184,7 +165,7 @@ The separate document includes:
 * In-depth circuit design
 * PCB construction
 * Enclosure design and mechanical integration
-* 3D Printing considerations
+* 3D-printing considerations
 * And plenty of information for curious minds
 
 This material is separated to keep the main project page more approachable while preserving a deeper technical explanation for interested readers.
@@ -209,11 +190,13 @@ The complete [808 EQ+ DIY Build Guide](BUILD_GUIDE.md) brings together the compo
 * Common 3D-printing plastics are generally less resistant to high temperatures than metal enclosures and may soften, warp, or deform if exposed to excessive heat.
 * A plastic enclosure does not inherently provide the electromagnetic shielding of a grounded metal enclosure.
 * Print quality and dimensional accuracy will vary depending on the 3D printer, material, calibration, and print settings used. I cannot guarantee that every print will be suitable for mounting components or that all printed text will be legible.
-* The current enclosure does not include a battery compartment.
+* The enclosure does not include an internal battery compartment or an automatic battery-disconnection feature.
 
 ### Electronics and Assembly Considerations
 
-* The design requires a suitable regulated 9 V center-negative supply.
+* A regulated 9 V DC, center-negative pedal supply is recommended. An external 9 V battery adapter is also supported if its 2.1 mm connector polarity is verified before use.
+* The circuit remains powered while bypassed. Disconnect an external battery when the pedal is not in use.
+* Do not apply more than 9 V. The reverse-polarity diode does not protect the circuit from excessive input voltage.
 * Some fabrication and assembly steps require prior soldering, electronics, CAD, or 3D-printing experience.
 
 ### Variations in Sound and Interpretation
@@ -262,9 +245,10 @@ Software and equipment used during development included:
 * LTspice
 * Analog Discovery 2 and WaveForms
 * Altium Designer
-* Autodesk Fusion
+* Autodesk Fusion 360
 * Bambu Studio
 * Bambu H2S
+* DIY Layout Creator
 * General electronic test, soldering, and assembly equipment
 
 ---

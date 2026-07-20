@@ -1,8 +1,8 @@
-# 808 EQ+ — Design, Prototyping, and Testing
+# 808 EQ+ — Technical Documentation
 
 This document contains the detailed development process, circuit design, PCB design, enclosure design, additive-manufacturing information, and experimental results for the 808 EQ+ guitar pedal.
 
-For the project overview, controls, build information, repository guide, and current release status, return to the [main README](README.md).
+For the project overview, controls, build guide, and current release status, return to the [main README](README.md).
 
 ## Table of Contents
 
@@ -53,7 +53,7 @@ For the project overview, controls, build information, repository guide, and cur
 * [Component-Driven Design](#component-driven-design)
 * [Printed Labels and Graphics](#printed-labels-and-graphics)
 * [Multi-Color Printing](#multi-color-printing)
-* [Final Print Files and Settings](#final-print-files-and-settings)
+* [Final Print Files and Build Guidance](#final-print-files-and-build-guidance)
 
 </details>
 
@@ -85,7 +85,6 @@ Each major section of the TS808 circuit was analyzed separately, including:
 * Active tone control
 * Power filtering
 * Bypass behavior
-* And other small intricacies
 
 This research established a known working baseline and made it possible to evaluate later modifications without losing track of the original circuit behavior. The part-by-part analysis was also used to identify modern components that could replace less-available original parts while preserving their electrical function.
 
@@ -112,7 +111,7 @@ After the original circuit was operating correctly, the breadboard and LTspice m
 
 The goal was to strike a useful balance between preserving the original TS808 character and adding meaningful tone-shaping options. The modifications were intended to be clearly audible without becoming either extreme or lackluster.
 
-An Analog Discovery 2 and WaveForms software were used to examine:
+The Analog Discovery 2 and WaveForms software were used to examine:
 
 * Frequency response
 * Filter corner frequencies
@@ -130,11 +129,11 @@ Final design decisions were made using a combination of circuit theory and analy
 
 *The circuit shown above is the final LTspice model containing the selected 808 EQ+ modifications.*
 
-Much of the Bass Pass Through and Treb Pass Through development involved experimenting with different capacitor and resistor values, adding components at different points in the signal path, and comparing several switching arrangements. 
+Much of the Bass Pass Through and Treble Pass Through development involved experimenting with different capacitor and resistor values, adding components at different points in the signal path, and comparing several switching arrangements.
 
 The bass experiments focused on adding enough low-frequency content to produce a thicker, fuller sound without allowing the clipped bass frequencies to become excessively strong or muddy. The treble experiments focused on improving transparency, clarity, and presence without making the pedal sound harsh or fizzy. The final values were selected because they produced noticeable but controlled alternatives to the original TS808 response.
 
-Detailed explanations of the selected circuits, component values, and filter corner frequencies are provided in [Bass Pass Through Switching](#bass-pass-through-switching) and [Treb Pass Through Switching](#treb-pass-through-switching).
+Detailed explanations of the selected circuits, component values, and filter corner frequencies are provided in [Bass Pass Through Switching](#bass-pass-through-switching) and [Treble Pass Through Switching](#treble-pass-through-switching).
 
 The clipping experiments compared multiple arrangements of LEDs and 1N4148 silicon diodes. Symmetric, asymmetric, and mixed-diode configurations were evaluated for differences in output volume, compression, sustain, picking dynamics, and overall distortion character.
 
@@ -162,7 +161,7 @@ After the breadboard design was stable, it was transferred to perfboard to creat
 The purpose of this design stage was to:
 
 * Consolidate the circuit
-* Integrate the true bypass foot switch
+* Integrate the true-bypass footswitch
 * Reduce breadboard-related connection problems
 * Test the design in a more durable and portable pedal format
 * Confirm the final circuit before beginning PCB design
@@ -172,7 +171,7 @@ The first 3D-printed enclosure prototype was developed in Autodesk Fusion 360 an
 The perfboard + test enclosure prototype was used to confirm:
 
 * Basic effect operation
-* True bypass functionality
+* True-bypass switching
 * Drive, Tone, and Level controls
 * Bass and Treble Pass Through behavior
 * Symmetric silicon clipping
@@ -224,7 +223,7 @@ The final phase began with assembling the manufactured PCB, inspecting the solde
 
 After confirming basic PCB operation, the controls, switches, jacks, LED, and other off-board components were installed. Enclosure fit, bypass operation, effect operation, and every switch configuration were evaluated alongside the pedal’s drive, output level, tone, and overall usability. Any mechanical or electrical issues identified during this process were corrected through further revisions.
 
-The enclosure-printing process was also refined in Bambu Studio to improve appearance, dimensional accuracy, component fit, and overall functionality. 
+The enclosure-printing process was also refined in Bambu Studio to improve appearance, dimensional accuracy, component fit, and overall functionality.
 
 The completed PCB, enclosure, and assembled pedal have been fully tested and validated. Final fit checks confirmed that the PCB, off-board components, wiring, and printed enclosure function together as intended.
 
@@ -238,32 +237,19 @@ The 808 EQ+ closely follows the original TS808 signal path while adding switchab
 
 ### Signal-Path Overview
 
-```text
-Guitar In
-  │
-  ▼
-Input Buffer
-  │
-  ▼
-Variable-Gain and Clipping Stage
-  │
-  ▼
-Active Tone and Treble-Filtering Stage
-  │
-  ▼
-Level Control
-  │
-  ▼
-Output Buffer
-  │
-  ▼
-True-Bypass Footswitch
-  │
-  ▼
-Effected Guitar Out
+```mermaid
+flowchart TB
+    IN["Guitar In"] --> SW{"3PDT true-bypass footswitch"}
+    SW -->|"Bypass: effect off"| OUT["Guitar Out"]
+    SW -->|"Effect engaged"| IB["Input Buffer"]
+    IB --> CLIP["Variable-Gain and Clipping Stage"]
+    CLIP --> TONE["Active Tone and Treble-Filtering Stage"]
+    TONE --> LEVEL["Level Control"]
+    LEVEL --> OB["Output Buffer"]
+    OB --> OUT
 ```
 
-The circuit can be understood as a sequence of functional stages rather than as one large schematic.
+When the effect is engaged, the footswitch routes the guitar through each functional circuit stage. In bypass, it connects the input directly to the output and grounds the unused effect input, removing the effect circuit from the guitar-signal path. The power connection is not shown; the circuit remains powered while bypassed.
 
 ![808 EQ+ schematic](Images/Software/Altium_Schematic.png)
 
@@ -275,13 +261,13 @@ The circuit can be understood as a sequence of functional stages rather than as 
 
 #### Power Input and Reverse-Polarity Protection
 
-The pedal is designed for a regulated **9 V DC, center-negative power supply** using the 2.1 mm barrel connector commonly found on modern guitar pedals. In this configuration, the connector’s outer sleeve supplies the positive voltage while its center pin is connected to ground.
+The recommended power source is a regulated **9 V DC, center-negative pedal supply** using the 2.1 mm barrel connector commonly found on modern guitar pedals. An external 9 V battery adapter is also supported if its connector polarity is verified before use. In either case, the connector’s outer sleeve supplies the positive voltage while its center pin is connected to ground.
 
 D1, a **1N4007 rectifier diode**, is placed in series with the positive supply path to provide reverse-polarity protection. This diode differs from the protection components used in historical TS808 circuits, but it was selected to follow common modern pedal-design practices and provide a robust, readily available replacement. Because D1 is part of the power-supply path rather than the audio signal path, this change has no significant effect on the pedal’s sound or tone during normal operation.
 
 If a supply with the opposite polarity is connected, the diode becomes reverse-biased and prevents significant current from flowing through the circuit. The pedal will not operate, and its transistors, op-amp, and polarized capacitors should be protected from reverse-polarity damage.
 
-The diode protects against reversed polarity, but it does not regulate the input or protect the circuit from excessive voltage. A properly polarized supply significantly above 9 V could exceed component ratings and damage the pedal. A regulated 9 V center-negative supply should therefore always be used.
+The diode protects against reversed polarity, but it does not regulate the input or protect the circuit from excessive voltage. Inputs above 9 V should not be used because they could exceed component ratings and damage the pedal.
 
 #### 4V5 Bias Reference
 
@@ -295,7 +281,7 @@ Because the circuit uses a single positive supply rather than positive and negat
 
 C2 filters and stabilizes the protected 9 V rail, while C1 filters and stabilizes the 4V5 reference. Their relatively large capacitances provide a low-impedance path to ground for low-frequency supply ripple, transient disturbances, and some coupled interference. This helps provide cleaner and more stable power to the audio circuit, although it cannot eliminate every possible source of power-supply or radio-frequency noise.
 
-The protected 9 V rail powers the active devices directly, including the op-amp supply and BJT collectors. The 4V5 reference is distributed through biasing resistors to establish the DC operating point at the beginning of the circuit’s audio stages. 
+The protected 9 V rail powers the active devices directly, including the op-amp supply and BJT collectors. The 4V5 reference is distributed through biasing resistors to establish the DC operating point at the beginning of the circuit’s audio stages.
 
 #### Nominal and Actual Voltages
 
@@ -329,7 +315,7 @@ In this relationship, reducing the driving resistance moves the low-pass corner 
 
 The input uses a mono 1/4-inch audio jack. The sleeve is connected to circuit ground, while the tip carries the guitar signal into the input buffer.
 
-Stereo input jacks are often used in pedals to disconnect an internal battery when the instrument cable is removed. Battery operation was outside the scope of this project, so a mono jack was selected to simplify the wiring and reduce cost.
+Stereo input jacks are often used in pedals to disconnect an internal battery when the instrument cable is removed. The 808 EQ+ has no internal battery compartment or automatic battery-disconnection feature, so a mono jack was selected to simplify the wiring and reduce cost. An external 9 V battery adapter remains supported, but it supplies the circuit whenever it is connected—including while the effect is bypassed—and should be disconnected when the pedal is not in use.
 
 #### Coupling Capacitors and Bias Transfer
 
@@ -441,17 +427,17 @@ The three configurations were selected because they provide distinct but practic
 
 ![Active tone and level-control schematic](Images/Software/Altium_Schematic_Tone_Volume.png)
 
-*Altium schematic of the fixed low-pass filter, active upper-frequency boost, Tone control, Treb Pass Through modification, and Level control.*
+*Altium schematic of the fixed low-pass filter, active upper-frequency boost, Tone control, Treble Pass Through modification, and Level control.*
 
 #### High-Level Function
 
-This stage provides control over the pedal’s upper-midrange and treble response. It combines a passive low-pass filter with an active, frequency-dependent op-amp stage. The Tone potentiometer blends between the darker filtered interaction and the brighter actively boosted interaction, allowing the player to move gradually from substantial treble reduction to a more bright and present response.
+This stage provides control over the pedal’s upper-midrange and treble response. It combines a passive low-pass filter with an active, frequency-dependent op-amp stage. The Tone potentiometer blends between the darker filtered interaction and the brighter actively boosted interaction, allowing the player to move gradually from substantial treble reduction to a brighter and more present response.
 
 The selected signal is then passed to the Level potentiometer, which controls the overall output amplitude. The coupling and buffering circuitry surrounding the Level control prevents the DC bias and external load from substantially interfering with the tone circuit.
 
 #### Frequency-Dependent Signal Paths
 
-The tone stage contains two primary frequency-dependent paths. The first is a low pass filter formed by R9 and either C7 or C13, depending on the position of the Treb Pass Through switch. The output is connected to the non-inverting (`+`) input of the op-amp. This filter's corner frequency is around 720 Hz. It cuts upper mid and high frequencies and sends the rest through the remainder of the tone circuit.
+The tone stage contains two primary frequency-dependent paths. The first is a low-pass filter formed by R9 and either C7 or C13, depending on the position of the Treble Pass Through switch. Its output is connected to the non-inverting (`+`) input of the op-amp. The selected capacitor determines the filter corner: C7 produces a corner near **720 Hz**, while C13 raises it to approximately **3.4 kHz**. The filter reduces content above the selected corner and passes the remaining signal into the rest of the tone circuit.
 
 The second frequency-dependent path is formed by R12 and C8. This path can be reached from the initial low-pass-filtered path through one portion of the Tone potentiometer. C8 and R12 also interact with the op-amp feedback loop through the other side of the Tone potentiometer.
 
@@ -473,23 +459,22 @@ Although this simplified analysis does not capture every interaction in the circ
 
 #### Tone-Pot Operation
 
-With the Tone control turned fully counterclockwise, its wiper is positioned toward the passive low-pass side of the circuit. This effectively puts C8 and R21 in parallel with C7 or C13. This leads to a stronger reduction in upper-midrange and treble content. Simultaneously, the Tone pot's full resistance is contributed to `Rg` and the gain of the non-inverting op amp is reduced close to unity. These interactions produce a much darker, muted output.
+With the Tone control turned fully counterclockwise, its wiper is positioned toward the passive low-pass side of the circuit. This effectively puts C8 and R12 in parallel with C7 or C13, leading to a stronger reduction in upper-midrange and treble content. Simultaneously, the Tone pot's full resistance contributes to `Rg`, reducing the gain of the non-inverting op amp close to unity. These interactions produce a much darker, muted output.
 
-With the Tone potentiometer turned fully clockwise, upper frequencies are actively boosted, providing substantially more upper-midrange and treble content. At the same time, 
-the Tone potentiometer reduces current flow through C8 and R12, preventing higher frequencies from being cut as dramatically. This results in a significantly brighter and potentially harsh output.
+With the Tone potentiometer turned fully clockwise, upper frequencies are actively boosted, providing substantially more upper-midrange and treble content. At the same time, the Tone potentiometer reduces current flow through C8 and R12, preventing higher frequencies from being cut as dramatically. This results in a significantly brighter and potentially harsh output.
 
 Intermediate settings blend the two responses nicely, allowing the player to adjust the pedal continuously between a darker, more heavily filtered sound and a brighter, more present sound.
 
-#### Treb Pass Through Switching
+#### Treble Pass Through Switching
 
-S1 and C13 form the **Treb Pass Through** modification. The SPDT switch selects the capacitor used with R9 in the tone-stage low-pass filter:
+S1 and C13 form the **Treble Pass Through** modification. The SPDT switch selects the capacitor used with R9 in the tone-stage low-pass filter:
 
 * Selecting C7 restores the original TS808-style corner frequency of approximately **720 Hz**.
 * Selecting C13 raises the corner frequency to approximately **3.4 kHz**.
 
 Raising the corner frequency allows substantially more upper-frequency content to reach the active tone circuit. C13 was selected to provide noticeably greater clarity, presence, and transparency without making the pedal excessively harsh or fizzy.
 
-The Treb Pass Through switch changes the signal entering both sides of the Tone control. The Tone potentiometer continues to provide its normal dark-to-bright adjustment, but the overall available frequency range is extended when C13 is selected.
+The Treble Pass Through switch changes the signal entering both sides of the Tone control. The Tone potentiometer continues to provide its normal dark-to-bright adjustment, but the overall available frequency range is extended when C13 is selected.
 
 #### Level Control
 
@@ -505,9 +490,9 @@ The Level control only attenuates the available signal; it does not provide addi
 
 *Altium schematic of the BJT output buffer, output coupling capacitor, pull-down resistor, and output jack.*
 
-#### Purpose and Impedance
+#### Purpose
 
-The output buffer performs a function similar to the [Input Buffer](#input-buffer), but its design priorities are slightly different. An extremely high input impedance is less critical here because the buffer is driven by the low-impedance tone-stage op-amp through the Level control rather than directly by passive guitar pickups. 
+The output buffer performs a function similar to the [Input Buffer](#input-buffer), but its design priorities are slightly different. An extremely high input impedance is less critical here because the buffer is driven by the low-impedance tone-stage op-amp through the Level control rather than directly by passive guitar pickups.
 
 Greater emphasis is placed on producing a low output impedance so the pedal can reliably drive an amplifier, another pedal, and the capacitance of the connected cable without significant signal loss or unwanted filtering.
 
@@ -527,7 +512,7 @@ The prepared signal is delivered through the tip of the mono output jack, while 
 
 #### 3PDT Switching
 
-Several mechanical true-bypass wiring arrangements are commonly used and can be found online. A 3PDT footswitch is especially useful when true-bypass signal routing, effect-input grounding, and LED indication must all be controlled by one switch.
+Several true-bypass wiring arrangements are commonly used and can be found online. A 3PDT footswitch is especially useful when true-bypass signal routing, effect-input grounding, and LED indication must all be controlled by one switch.
 
 A 3PDT switch contains three electrically independent poles that change state together. Each pole has a center common lug that connects to one of two outer lugs depending on the footswitch position. The switches purchased for this project included small breakout PCBs that simplify these connections and reduce the amount of point-to-point wiring required during assembly.
 
@@ -539,7 +524,7 @@ When the effect is bypassed, the input jack is connected directly to the output 
 
 At the same time, the effect-circuit input is connected to ground. Grounding the unused input prevents it from floating, where it could collect noise or create unpredictable behavior that becomes audible when the effect is re-engaged.
 
-“True bypass” refers to the audio signal being disconnected from the effect circuit. The internal circuit may remain electrically powered even while bypassed, but it is removed from the active guitar-signal path.
+“True bypass” refers to the audio signal being disconnected from the effect circuit. The internal circuit remains electrically powered while bypassed, but it is removed from the active guitar-signal path.
 
 #### Effect State
 
@@ -590,7 +575,7 @@ The PCB was designed around the following priorities:
 
 * Preserve the validated TS808-style circuit
 * Use readily solderable through-hole components
-* Grouping components by functional circuit block
+* Group components by functional circuit block
 * Provide practical connection points for off-board wiring
 * Support component replacement and experimentation
 * Fit efficiently within the custom printed enclosure
@@ -606,7 +591,7 @@ The completed Altium library files are available in the repository’s [`Design/
 
 ### Through-Hole Components
 
-Through-hole components were selected because they are relatively easy to solder by hand, inspect visually, and replace when necessary. They are also familiar to many hobbyists, readily available in small quantities, and compatible with machine-pin sockets for experimentation or repair. 
+Through-hole components were selected because they are relatively easy to solder by hand, inspect visually, and replace when necessary. They are also familiar to many hobbyists, readily available in small quantities, and compatible with machine-pin sockets for experimentation or repair.
 
 Although through-hole construction requires more board space than surface-mount construction, the increased accessibility and serviceability made the larger PCB area a worthwhile tradeoff.
 
@@ -648,7 +633,7 @@ Several PCB manufacturers, including [OSH Park](https://oshpark.com/), [JLCPCB](
 
 The relevant Altium project files, Gerber files, drill files, and other manufacturing outputs are available in the repository’s [`Design/PCB`](Design/PCB/) folder.
 
-*Physical bare-PCB and assembled-PCB photographs will be added after final documentation is complete.*
+*Physical bare-PCB and assembled-PCB photographs will be added here.*
 
 ---
 
@@ -707,7 +692,7 @@ The face labels and symbols are integrated into the enclosure model rather than 
 
 Contrasting filament is inlaid flush with the enclosure surface. The label geometry is designed to print against the build plate, producing a clean, flat front face without raised or recessed lettering.
 
-A smooth PEI plate was used to improve the finish and readability of the labels. A textured plate may also work, but it can produce a shinier surface texture, less crisp lettering, more irregular edges, and blobbier or harder-to-read small text
+A smooth PEI plate was used to improve the finish and readability of the labels. A textured plate may also work, but it can produce a shinier surface texture, less crisp lettering, more irregular edges, and blobbier or harder-to-read small text.
 
 ### Multi-Color Printing
 
@@ -721,18 +706,13 @@ Multi-color printing is optional; the enclosure can also be printed in one color
 | --- | --- |
 | ![Sliced enclosure](Images/Software/BambuStudio_Enclosure_Sliced_Iso.png) | ![Sliced underside of enclosure](Images/Software/BambuStudio_Enclosure_Sliced_Underside.png) |
 
-### Final Print Files and Settings
+### Final Print Files and Build Guidance
 
 The final enclosure geometry, tolerances, component fit, and appearance were physically validated before the print files were released. The design was developed around the components listed in the project BOM and balances label clarity, structural strength, accessible assembly, and a compact internal layout.
 
-The repository's [`Design/3D_Printing`](Design/3D_Printing/) folder provides two types of print files:
+Both STL geometry and prepared 3MF projects are provided in [`Design/3D_Printing`](Design/3D_Printing/). The STL files preserve broad slicer compatibility, while the 3MF projects retain the validated Bambu Studio arrangement and provide a reference for the intended orientation, object separation, and color assignments.
 
-* **STL files** contain the printable geometry and are intended for manual preparation in a compatible slicer.
-* **3MF files** preserve the prepared Bambu Studio project, including object arrangement, filament assignments, and the validated slicer configuration. They are the most direct starting point for a compatible Bambu printer.
-
-The modified print settings are modest adjustments intended to improve surface appearance, label clarity, dimensional consistency, and structural integrity rather than radically change the default print profile. Additionally, the documented settings are intended as a tested baseline rather than universal requirements. Every printer, filament, build plate, slicer version, and environment can produce different dimensional accuracy, surface finish, support behavior, and label clarity. Hardware that differs from the BOM may also require adjusted openings or tolerances.
-
-Detailed slicer settings, support checks, seam guidance, part orientation, and pre-assembly fit checks are maintained in [Part 3 of the build guide](BUILD_GUIDE.md#3-print-and-verify-the-enclosure-parts).
+Printer-specific results will still vary, so practical slicer settings, support checks, seam placement, part orientation, and pre-assembly fit guidance are maintained in [Part 3 of the build guide](BUILD_GUIDE.md#3-print-and-verify-the-enclosure-parts).
 
 ---
 
