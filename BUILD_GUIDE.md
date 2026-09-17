@@ -258,7 +258,7 @@ Whether using the manufactured PCB or perfboard, match every connection and comp
 
 If sockets will be used, install them before the surrounding components. Socket pins cannot be bent outward like ordinary component leads, so they are more difficult to hold in place while soldering. The 8-pin IC socket is recommended because it simplifies op-amp installation and replacement.
 
-Individual machine-pin sockets are purely optional. I found single sockets difficult enough to align and solder that I do not plan to use them extensively in future PCB builds. Their experimental flexibility may still be worthwhile for builders who plan to swap components out often.
+Individual machine-pin sockets are optional. Because single sockets can be difficult to align and solder, they are best reserved for components likely to be swapped during experimentation or repair.
 
 After any sockets are installed, populate the board from the lowest-profile components to the tallest. For the provided PCB:
 

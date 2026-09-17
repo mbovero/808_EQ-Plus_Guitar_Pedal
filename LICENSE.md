@@ -44,7 +44,7 @@ When a hardware-design export is reproduced inside the documentation, the underl
 
 ## Software
 
-No separate software license is currently declared because the repository does not contain a substantial standalone software component. Any software, firmware, or reusable scripts added later should include an explicit software license rather than relying on either license above.
+The repository does not contain a substantial standalone software component, so no separate software license applies. Any standalone software, firmware, or reusable script must carry an explicit software license; neither license above should be assumed to apply.
 
 ## Branding and Trademarks
 
@@ -103,4 +103,3 @@ Datasheets, product photographs, manufacturer models, and other supplier-provide
 ## Reporting an Issue
 
 If material in the repository appears to be incorrectly attributed, improperly included, or subject to an incompatible license, please open a GitHub issue with the affected path, original source, and relevant licensing information so it can be reviewed and corrected.
-
