@@ -6,9 +6,12 @@ Most of the 808 EQ+ signal path closely replicates the original TS808 using mode
 
 When more flexibility is desired, the added switches can extend the pedal’s bass response, open its upper-frequency response, and select between three distinct clipping configurations.
 
+![Completed 808 EQ+ overdrive pedal](Images/Physical/Pedal_Iso_Modified.png)
+
+*Completed 808 EQ+ overdrive pedal.*
+
 ## Table of Contents
 
-* [Project Status](#project-status)
 * [What Is the 808 EQ+?](#what-is-the-808-eq)
 * [Why Build Another Tube Screamer?](#why-build-another-tube-screamer)
 * [Design Goals](#design-goals)
@@ -18,27 +21,6 @@ When more flexibility is desired, the added switches can extend the pedal’s ba
 * [Warnings and Limitations](#warnings-and-limitations)
 * [Credits and References](#credits-and-references)
 * [Disclaimer](#disclaimer)
-
-## Project Status
-
-* [x] Original TS808 circuit researched and analyzed
-* [x] Original circuit simulated
-* [x] Original circuit breadboarded
-* [x] Tone and clipping modifications evaluated
-* [x] Perfboard prototype constructed
-* [x] Prototype electrically and audibly validated
-* [x] Custom PCB designed
-* [x] PCB manufacturing files prepared
-* [x] Enclosure modeled
-* [x] Latest PCB revision fully assembled and validated
-* [x] Latest enclosure revision physically validated
-* [x] Final STEP and STL files uploaded
-* [x] Final Bambu Studio project uploaded
-* [x] Dimensional drawings uploaded
-* [ ] Final prototype, PCB, and pedal photographs added
-* [ ] Audio demonstrations added
-* [x] Main README, technical documentation, and build guide completed
-* [x] Polished user guide developed
 
 ---
 
@@ -135,6 +117,10 @@ This is not intended to be the simplest possible beginner soldering kit. It is a
 ## Controls and Operation
 
 The 808 EQ+ uses three knobs, four toggle switches, and a true-bypass footswitch.
+
+![Top view of the completed 808 EQ+ pedal](Images/Physical/Pedal_Top_Modified.png)
+
+*Top view of the completed pedal and its controls.*
 
 | Control | What it does |
 | --- | --- |

@@ -125,7 +125,7 @@ Although these tools provided useful electrical measurements, a guitar-pedal cir
 
 Final design decisions were made using a combination of circuit theory and analysis, LTspice simulation, Analog Discovery 2 measurements, and careful listening and experimentation with a guitar and amplifier. Measurements helped explain and compare circuit behavior, while hands-on playing determined whether each change was musically useful.
 
-![Modified 808 EQ+ LTspice circuit](Images/Software/LTspice_Circuit.png)
+![Modified 808 EQ+ LTspice circuit](Images/Digital/LTspice_Circuit.png)
 
 *The circuit shown above is the final LTspice model containing the selected 808 EQ+ modifications.*
 
@@ -141,7 +141,9 @@ The final options were selected because each produced a distinct and practical s
 
 For a detailed explanation of the diode arrangements, clipping thresholds, and switch operation, see [Feedback-Loop Diode Clipping](#feedback-loop-diode-clipping) and [Clipping Switches and Configurations](#clipping-switches-and-configurations).
 
-*A photograph of the modified breadboard circuit will be added here.*
+![Modified 808 EQ+ breadboard prototype](Images/Physical/Breadboard_Iso.jpeg)
+
+*Modified breadboard prototype used to evaluate the final EQ and clipping changes.*
 
 Several other possible features were also considered and tested, including:
 
@@ -156,7 +158,7 @@ These options were not included in the final design because their changes were u
 
 After the breadboard design was stable, it was transferred to perfboard to create a compact, more permanent circuit that reduced loose wiring, established a practical layout, and could be mounted inside a pedal enclosure.
 
-![Perfboard layout](Images/Software/Perfboard_DIYLayout.png)
+![Perfboard layout](Images/Digital/Perfboard_DIYLayout.png)
 
 The purpose of this design stage was to:
 
@@ -251,11 +253,11 @@ flowchart TB
 
 When the effect is engaged, the footswitch routes the guitar through each functional circuit stage. In bypass, it connects the input directly to the output and grounds the unused effect input, removing the effect circuit from the guitar-signal path. The power connection is not shown; the circuit remains powered while bypassed.
 
-![808 EQ+ schematic](Images/Software/Altium_Schematic.png)
+![808 EQ+ schematic](Images/Digital/Altium_Schematic.png)
 
 ### Power Supply and Bias Network
 
-![Power supply and bias network schematic](Images/Software/Altium_Schematic_Power.png)
+![Power supply and bias network schematic](Images/Digital/Altium_Schematic_Power.png)
 
 *Altium schematic of the 9 V input, reverse-polarity protection, supply filtering, and power rails.*
 
@@ -293,7 +295,7 @@ These variations are expected and do not prevent normal operation. The important
 
 ### Input Buffer
 
-![Input buffer schematic](Images/Software/Altium_Schematic_Input_Buffer.png)
+![Input buffer schematic](Images/Digital/Altium_Schematic_Input_Buffer.png)
 
 *Altium schematic of the input jack, coupling capacitors, bias network, and BJT emitter-follower buffer.*
 
@@ -339,7 +341,7 @@ An emitter follower has a voltage gain slightly below 1, so it does not signific
 
 ### Variable-Gain and Clipping Stage
 
-![Amplification and clipping stage schematic](Images/Software/Altium_Schematic_Gain_Clipping.png)
+![Amplification and clipping stage schematic](Images/Digital/Altium_Schematic_Gain_Clipping.png)
 
 *Altium schematic of the non-inverting op-amp gain stage, frequency-dependent feedback network, Bass Pass Through switching, and selectable diode-clipping configurations.*
 
@@ -387,7 +389,7 @@ A passive SPDT switch selects between C5 and C12. This keeps the modification si
 
 C5 and C12 also introduce a frequency-dependent phase shift, particularly around their respective corner frequencies. This phase response contributes to the shape of the resulting waveform, although the visible waveform is produced by the combined effects of filtering, amplification, clipping, and phase shift rather than by a simple time delay alone.
 
-![Tube Screamer waveform shape](Images/Software/Waveforms_TS_Wave_Shape.png)
+![Tube Screamer waveform shape](Images/Digital/Waveforms_TS_Wave_Shape.png)
 
 *Measured Tube Screamer-style waveform showing the characteristic shape produced by frequency-dependent amplification, capacitor phase shift, and feedback-loop clipping. Input is orange, and output is blue.*
 
@@ -425,7 +427,7 @@ The three configurations were selected because they provide distinct but practic
 
 ### Active Tone Stage
 
-![Active tone and level-control schematic](Images/Software/Altium_Schematic_Tone_Volume.png)
+![Active tone and level-control schematic](Images/Digital/Altium_Schematic_Tone_Volume.png)
 
 *Altium schematic of the fixed low-pass filter, active upper-frequency boost, Tone control, Treble Pass Through modification, and Level control.*
 
@@ -486,7 +488,7 @@ The Level control only attenuates the available signal; it does not provide addi
 
 ### Output Buffer
 
-![Output buffer schematic](Images/Software/Altium_Schematic_Output_Buffer.png)
+![Output buffer schematic](Images/Digital/Altium_Schematic_Output_Buffer.png)
 
 *Altium schematic of the BJT output buffer, output coupling capacitor, pull-down resistor, and output jack.*
 
@@ -567,7 +569,7 @@ The PCB was developed through the following process:
 
 | PCB top                                           | PCB bottom                                              |
 | ------------------------------------------------- | ------------------------------------------------------- |
-| ![PCB top](Images/Software/Altium_PCB_3D_Top.png) | ![PCB bottom](Images/Software/Altium_PCB_3D_Bottom.png) |
+| ![PCB top](Images/Digital/Altium_PCB_3D_Top.png) | ![PCB bottom](Images/Digital/Altium_PCB_3D_Bottom.png) |
 
 ### Design Priorities
 
@@ -633,7 +635,13 @@ Several PCB manufacturers, including [OSH Park](https://oshpark.com/), [JLCPCB](
 
 The relevant Altium project files, Gerber files, drill files, and other manufacturing outputs are available in the repository’s [`Design/PCB`](Design/PCB/) folder.
 
-*Physical bare-PCB and assembled-PCB photographs will be added here.*
+| Bare PCB — component side | Bare PCB — solder side |
+| --- | --- |
+| ![Component side of the bare PCB](Images/Physical/PCB_Top_Bare.jpeg) | ![Solder side of the bare PCB](Images/Physical/PCB_Bottom_Bare.jpeg) |
+
+![Assembled PCB with the off-board controls connected](Images/Physical/PCB_Iso_Assembled.jpeg)
+
+*Assembled PCB and off-board controls prepared for bench testing.*
 
 ---
 
@@ -641,7 +649,7 @@ The relevant Altium project files, Gerber files, drill files, and other manufact
 
 The enclosure was designed as an integrated part of the project rather than as a generic box added after the electronics were complete.
 
-![Bare enclosure](Images/Software/Fusion_Bare_Enclosure_Iso.png)
+![Bare enclosure](Images/Digital/Fusion_Bare_Enclosure_Iso.png)
 
 ### Why Use a Printed Enclosure?
 
@@ -673,7 +681,11 @@ These component models were used to determine the required hole diameters, inter
 
 | Component placement                                               | Enclosure interior                                                      |
 | ----------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| ![Component placement](Images/Software/Fusion_Components_Top.png) | ![Enclosure interior](Images/Software/Fusion_Bare_Enclosure_Inside.png) |
+| ![Component placement](Images/Digital/Fusion_Components_Top.png) | ![Enclosure interior](Images/Digital/Fusion_Bare_Enclosure_Inside.png) |
+
+![Interior of the empty printed enclosure](Images/Physical/Enclosure_Inside_Bare.jpeg)
+
+*Printed enclosure interior showing the component openings, locating features, and assembly space.*
 
 The enclosure also includes:
 
@@ -694,6 +706,10 @@ Contrasting filament is inlaid flush with the enclosure surface. The label geome
 
 A smooth PEI plate was used to improve the finish and readability of the labels. A textured plate may also work, but it can produce a shinier surface texture, less crisp lettering, more irregular edges, and blobbier or harder-to-read small text.
 
+![Top view of the empty printed enclosure](Images/Physical/Enclosure_Top_Bare.jpeg)
+
+*Printed enclosure face showing the flush labels and graphics.*
+
 ### Multi-Color Printing
 
 The enclosure graphics were designed as separate inlays that print flush with the front surface. Printing the enclosure face-down places both the enclosure and label geometry against the build plate, producing a unified surface without decals, raised lettering, or post-processing.
@@ -704,7 +720,7 @@ Multi-color printing is optional; the enclosure can also be printed in one color
 
 | Sliced enclosure | Sliced underside |
 | --- | --- |
-| ![Sliced enclosure](Images/Software/BambuStudio_Enclosure_Sliced_Iso.png) | ![Sliced underside of enclosure](Images/Software/BambuStudio_Enclosure_Sliced_Underside.png) |
+| ![Sliced enclosure](Images/Digital/BambuStudio_Enclosure_Sliced_Iso.png) | ![Sliced underside of enclosure](Images/Digital/BambuStudio_Enclosure_Sliced_Underside.png) |
 
 ### Final Print Files and Build Guidance
 

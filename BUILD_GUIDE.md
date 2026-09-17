@@ -46,8 +46,8 @@ The enclosure was designed around the specific parts listed in the project BOM. 
 | [`808_EQ-Plus_Tools_and_Fabrication_Info.xlsx`](Design/808_EQ-Plus_Tools_and_Fabrication_Info.xlsx) | Tools, equipment, fabrication resources, and estimated costs |
 | [`Design/PCB`](Design/PCB/) | Altium files, libraries, Gerber files, drill files, and other PCB manufacturing outputs |
 | [`Design/3D_Printing`](Design/3D_Printing/) | STL files, prepared 3MF projects, and other enclosure-printing resources |
-| [Complete schematic](Images/Software/Altium_Schematic.png) | Full electrical schematic for assembly and troubleshooting reference |
-| [Perfboard DIY layout](Images/Software/Perfboard_DIYLayout.png) | Layout used for the working perfboard prototype and a starting point for perfboard construction |
+| [Complete schematic](Images/Digital/Altium_Schematic.png) | Full electrical schematic for assembly and troubleshooting reference |
+| [Perfboard DIY layout](Images/Digital/Perfboard_DIYLayout.png) | Layout used for the working perfboard prototype and a starting point for perfboard construction |
 | [PCB Design section](TECHNICAL_DOCUMENTATION.md#pcb-design) | PCB construction, socketing, routing, grounding, and manufacturer-selection notes |
 | [Enclosure Design and 3D Printing section](TECHNICAL_DOCUMENTATION.md#enclosure-design-and-3d-printing) | Detailed enclosure-design rationale and print-development information |
 
@@ -107,7 +107,7 @@ Do not skip the intermediate fit and electrical checks. They make faults much ea
 Before ordering or assembling anything:
 
 1. Review the [main README](README.md) for a general overview of the project.
-2. Review the [complete schematic](Images/Software/Altium_Schematic.png) and relevant parts of the [Technical Documentation](TECHNICAL_DOCUMENTATION.md).
+2. Review the [complete schematic](Images/Digital/Altium_Schematic.png) and relevant parts of the [Technical Documentation](TECHNICAL_DOCUMENTATION.md).
 3. Compare the BOM against the parts you already own and identify any intended substitutions.
 4. Decide whether to order the provided PCB or construct the circuit on perfboard.
 5. Decide whether the experimental components will be soldered directly or installed in machine-pin sockets. See [Socketed and Replaceable Components](TECHNICAL_DOCUMENTATION.md#socketed-and-replaceable-components) for guidance.
@@ -134,11 +134,11 @@ Before submitting an order:
 
 Building the circuit on perfboard can avoid PCB manufacturing and delivery delays and may reduce fabrication costs. The tradeoff is a substantial increase in time, effort, and precision: every connection must be planned and soldered individually, and the holes are not labeled or grouped by component type or circuit block. This makes assembly slower, less organized, and more error-prone.
 
-The repository’s [perfboard DIY layout](Images/Software/Perfboard_DIYLayout.png) is the layout I designed and used for the first working prototype. It is functional, but it is not presented as the most compact or optimized arrangement. Builders may reproduce it or develop their own layout.
+The repository’s [perfboard DIY layout](Images/Digital/Perfboard_DIYLayout.png) is the layout I designed and used for the first working prototype. It is functional, but it is not presented as the most compact or optimized arrangement. Builders may reproduce it or develop their own layout.
 
 Any custom perfboard layout must also fit within the available enclosure space and leave adequate room for the off-board wiring and bottom plate.
 
-[DIY Layout Creator](https://diy-fever.com/software/diylc/) is recommended for planning a custom perfboard, stripboard, or point-to-point layout before assembly. Regardless of which layout is used, compare every connection against the [complete schematic](Images/Software/Altium_Schematic.png). A layout drawing is a construction aid; the schematic remains the authoritative electrical reference.
+[DIY Layout Creator](https://diy-fever.com/software/diylc/) is recommended for planning a custom perfboard, stripboard, or point-to-point layout before assembly. Regardless of which layout is used, compare every connection against the [complete schematic](Images/Digital/Altium_Schematic.png). A layout drawing is a construction aid; the schematic remains the authoritative electrical reference.
 
 ### Component Inspection
 
@@ -181,7 +181,7 @@ Multi-color printing is optional. Alternatives include:
 
 | Sliced enclosure | Sliced underside |
 | --- | --- |
-| ![Sliced enclosure](Images/Software/BambuStudio_Enclosure_Sliced_Iso.png) | ![Sliced underside](Images/Software/BambuStudio_Enclosure_Sliced_Underside.png) |
+| ![Sliced enclosure](Images/Digital/BambuStudio_Enclosure_Sliced_Iso.png) | ![Sliced underside](Images/Digital/BambuStudio_Enclosure_Sliced_Underside.png) |
 
 ### Manual STL Preparation
 
@@ -244,11 +244,15 @@ After all enclosure parts finish printing, complete a dry fit before installing 
 * Confirm adequate clearance for nuts, washers, solder lugs, wiring, and tools.
 * Verify label and graphic clarity before continuing with a long assembly.
 
+| Printed enclosure face | Printed enclosure interior |
+| --- | --- |
+| ![Top view of the empty printed enclosure](Images/Physical/Enclosure_Top_Bare.jpeg) | ![Interior of the empty printed enclosure](Images/Physical/Enclosure_Inside_Bare.jpeg) |
+
 Light sanding or printer-specific tolerance adjustment may be required. Avoid forcing parts into openings because this can crack the enclosure or damage component threads.
 
 ## 4. Assemble the Circuit Board
 
-Whether using the manufactured PCB or perfboard, match every connection and component value to the BOM and [complete schematic](Images/Software/Altium_Schematic.png). Verify diode polarity, electrolytic-capacitor polarity, transistor pinouts, and integrated-circuit orientation before soldering.
+Whether using the manufactured PCB or perfboard, match every connection and component value to the BOM and [complete schematic](Images/Digital/Altium_Schematic.png). Verify diode polarity, electrolytic-capacitor polarity, transistor pinouts, and integrated-circuit orientation before soldering.
 
 ### Sockets and Board Components
 
@@ -284,6 +288,10 @@ On the manufactured PCB, the pad labeled `9V` provides the filtered and reverse-
 ## 5. Test the Circuit Board Outside the Enclosure
 
 Testing the completed PCB or perfboard assembly before enclosure installation separates electrical faults from mechanical problems.
+
+![Assembled PCB with the off-board controls connected](Images/Physical/PCB_Iso_Assembled.jpeg)
+
+*Assembled PCB and off-board controls prepared for bench testing; follow the schematic for wiring.*
 
 ### Power-Off Checks
 
