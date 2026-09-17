@@ -103,7 +103,7 @@ The breadboard stage facilitated the analysis of:
 * Symmetric silicon clipping
 * Practical operation with a guitar and amplifier
 
-Images were not captured of the original unmodified LTspice circuit or breadboard prototype. However, images shown in the following section display the final circuit with the integrated EQ+ modifications.
+The visual documentation in the following section begins with the final LTspice model and breadboard prototype after the EQ+ modifications were integrated.
 
 ### 3. Frequency-Response and Clipping Experiments
 
@@ -187,7 +187,9 @@ This validation established the final circuit configuration that would then be t
 
 The perfboard circuit and faceless enclosure also exposed practical problems that were not as apparent during breadboard testing. These steps were helpful in understanding the intricacies of developing an intuitive, visually appealing, and reliable pedal. They allowed me to refine the physical circuit-assembly process, develop a more compact and easy-to-use enclosure, and configure 3D-printing settings that balanced appearance, dimensional accuracy, and functionality.
 
-*Photos of the perfboard circuit and faceless enclosure prototype will be added here.*
+| Faceless prototype exterior | Perfboard prototype interior |
+| --- | --- |
+| ![Top view of the assembled faceless prototype](Images/Physical/Prototype_Top_Assembled.jpeg) | ![Interior of the assembled prototype showing the perfboard circuit](Images/Physical/Prototype_Inside_Assembled.jpeg) |
 
 ### 5. Component Selection and Price Optimization
 
