@@ -6,9 +6,15 @@ Most of the 808 EQ+ signal path closely replicates the original TS808 using mode
 
 When more flexibility is desired, the added switches can extend the pedal’s bass response, open its upper-frequency response, and select between three distinct clipping configurations.
 
-![Completed 808 EQ+ overdrive pedal](Images/Physical/Pedal_Iso_Modified.png)
+<p align="center">
+  <img
+    src="Images/Physical/Pedal_Iso_Modified.png"
+    alt="Completed 808 EQ+ overdrive pedal."
+    width="750"
+  >
+</p>
 
-*Completed 808 EQ+ overdrive pedal.*
+<p align="center"><em>Completed 808 EQ+ overdrive pedal.</em></p>
 
 ## Table of Contents
 
@@ -118,9 +124,15 @@ This is not intended to be the simplest possible beginner soldering kit. It is a
 
 The 808 EQ+ uses three knobs, four toggle switches, and a true-bypass footswitch.
 
-![Top view of the completed 808 EQ+ pedal](Images/Physical/Pedal_Top_Modified.png)
+<p align="center">
+  <img
+    src="Images/Physical/Pedal_Top_Modified.png"
+    alt="Top view of the completed 808 EQ+ pedal"
+    width="500"
+  >
+</p>
 
-*Top view of the completed pedal and its controls.*
+<p align="center"><em>Top view of the completed pedal and its controls.</em></p>
 
 | Control | What it does |
 | --- | --- |
