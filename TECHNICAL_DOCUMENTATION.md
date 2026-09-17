@@ -637,9 +637,32 @@ Several PCB manufacturers, including [OSH Park](https://oshpark.com/), [JLCPCB](
 
 The relevant Altium project files, Gerber files, drill files, and other manufacturing outputs are available in the repository’s [`Design/PCB`](Design/PCB/) folder.
 
-| Bare PCB — component side | Bare PCB — solder side |
-| --- | --- |
-| ![Component side of the bare PCB](Images/Physical/PCB_Top_Bare.jpeg) | ![Solder side of the bare PCB](Images/Physical/PCB_Bottom_Bare.jpeg) |
+<table>
+  <thead>
+    <tr>
+      <th>Bare PCB — component side</th>
+      <th>Bare PCB — solder side</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="center">
+        <img
+          src="Images/Physical/PCB_Top_Bare.jpeg"
+          alt="Component side of the bare PCB"
+          width="70%"
+        >
+      </td>
+      <td align="center">
+        <img
+          src="Images/Physical/PCB_Bottom_Bare.jpeg"
+          alt="Solder side of the bare PCB"
+          width="100%"
+        >
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ![Assembled PCB with the off-board controls connected](Images/Physical/PCB_Iso_Assembled.jpeg)
 
@@ -681,13 +704,10 @@ All enclosure-mounted components were modeled specifically for this project, inc
 
 These component models were used to determine the required hole diameters, internal spacing, PCB position, wire-routing space, footswitch clearance, jack depth, wall thickness, bottom-cover geometry, and tool access needed during assembly.
 
-| Component placement                                               | Enclosure interior                                                      |
+| Component placement (top-down)                                    | Enclosure interior                                                      |
 | ----------------------------------------------------------------- | ----------------------------------------------------------------------- |
 | ![Component placement](Images/Digital/Fusion_Components_Top.png) | ![Enclosure interior](Images/Digital/Fusion_Bare_Enclosure_Inside.png) |
 
-![Interior of the empty printed enclosure](Images/Physical/Enclosure_Inside_Bare.jpeg)
-
-*Printed enclosure interior showing the component openings, locating features, and assembly space.*
 
 The enclosure also includes:
 
@@ -708,9 +728,15 @@ Contrasting filament is inlaid flush with the enclosure surface. The label geome
 
 A smooth PEI plate was used to improve the finish and readability of the labels. A textured plate may also work, but it can produce a shinier surface texture, less crisp lettering, more irregular edges, and blobbier or harder-to-read small text.
 
-![Top view of the empty printed enclosure](Images/Physical/Enclosure_Top_Bare.jpeg)
+<p align="center">
+  <img
+    src="Images/Physical/Enclosure_Top_Bare.jpeg"
+    alt="Printed enclosure face showing the flush labels and graphics."
+    width="500"
+  >
+</p>
 
-*Printed enclosure face showing the flush labels and graphics.*
+<p align="center"><em>Printed enclosure face showing the flush labels and graphics.</em></p>
 
 ### Multi-Color Printing
 
