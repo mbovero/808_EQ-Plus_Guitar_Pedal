@@ -244,9 +244,32 @@ After all enclosure parts finish printing, complete a dry fit before installing 
 * Confirm adequate clearance for nuts, washers, solder lugs, wiring, and tools.
 * Verify label and graphic clarity before continuing with a long assembly.
 
-| Printed enclosure face | Printed enclosure interior |
-| --- | --- |
-| ![Top view of the empty printed enclosure](Images/Physical/Enclosure_Top_Bare.jpeg) | ![Interior of the empty printed enclosure](Images/Physical/Enclosure_Inside_Bare.jpeg) |
+<table>
+  <thead>
+    <tr>
+      <th>Printed enclosure face</th>
+      <th>Printed enclosure interior</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="center">
+        <img
+          src="Images/Physical/Enclosure_Top_Bare.jpeg"
+          alt="Top view of the empty printed enclosure"
+          width="100%"
+        >
+      </td>
+      <td align="center">
+        <img
+          src="Images/Physical/Enclosure_Inside_Bare.jpeg"
+          alt="Interior of the empty printed enclosure"
+          width="65%"
+        >
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 Light sanding or printer-specific tolerance adjustment may be required. Avoid forcing parts into openings because this can crack the enclosure or damage component threads.
 
